@@ -1,0 +1,166 @@
+<!-- Header Navbar Start -->
+<div class="header--nav bg-bluewood">
+	<div class="container">
+		<!-- IF S_REGISTERED_USER -->
+		<!-- EVENT navbar_header_user_profile_prepend -->
+		
+		<div class="header-member-info clearfix">
+			<!-- IF S_NOTIFICATIONS_DISPLAY -->
+			<div class="dropdown header-member--notifications<!-- IF NOTIFICATIONS_COUNT --> has-unread<!-- ENDIF -->">
+				<a href="#" class="header-member-notifications--toggle" data-toggle="dropdown">
+					<i class="fa fa-bell"></i>
+					<!-- IF NOTIFICATIONS_COUNT eq '0' -->
+						<!-- ELSE -->
+						<small>{NOTIFICATIONS_COUNT}</small>
+					<!-- ENDIF -->
+				</a>
+				
+				<div class="dropdown-menu">
+					<div class="dropdown--header clearfix">
+						<h4>Notifications<!-- IF NOTIFICATIONS_COUNT --><span class="count"> ({NOTIFICATIONS_COUNT})<!-- ENDIF --></span></h4>
+						
+						<!-- IF NOTIFICATIONS_COUNT -->
+							<a href="{U_MARK_ALL_NOTIFICATIONS}" data-ajax="notifications.mark_all" class="action mark-all pull-right"><i class="fa fa-check-square-o"></i></a>
+						<!-- ENDIF -->
+						
+						<a href="{U_NOTIFICATION_SETTINGS}" class="action pull-right"><i class="fa fa-cog"></i></a>
+					</div>
+					<div class="dropdown--body">
+						<!-- IF not .notifications -->
+							<p class="no-notification">{L_NO_NOTIFICATIONS}</p>
+						<!-- ENDIF -->
+						<!-- BEGIN notifications(0,2) -->
+							<div class="dropdown-body--notification<!-- IF notifications.UNREAD --> is-unread<!-- ENDIF --> clearfix">
+								<!-- IF notifications.URL -->
+									<a class="notification-block clearfix" href="<!-- IF notifications.UNREAD -->{notifications.U_MARK_READ}" data-real-url="{notifications.URL}<!-- ELSE -->{notifications.URL}<!-- ENDIF -->">
+								<!-- ENDIF -->
+								
+								<!-- IF notifications.AVATAR -->
+									{notifications.AVATAR}
+								<!-- ELSE -->
+									<img src="{T_THEME_PATH}/images/no-avatar.png" alt="" />
+								<!-- ENDIF -->
+								
+								<div class="dropdown-body-notification--text">
+									<p class="notification-title">{notifications.FORMATTED_TITLE}</p>
+									<!-- IF notifications.REFERENCE -->
+										<p class="notification-reference">{notifications.REFERENCE}</p>
+									<!-- ENDIF -->
+									<!-- IF notifications.FORUM -->
+										<p class="notification-forum">{notifications.FORUM}</p>
+									<!-- ENDIF -->
+									<!-- IF notifications.REASON -->
+										<p class="notification-reason">{notifications.REASON}</p>
+									<!-- ENDIF -->
+									
+									<p class="notification-time">{notifications.TIME}</p>
+								</div>
+								
+								<!-- IF notifications.URL -->
+									</a>
+								<!-- ENDIF -->
+							</div>
+						<!-- END notifications -->
+						<a href="{U_VIEW_ALL_NOTIFICATIONS}" class="see-all">{L_SEE_ALL}</a>
+					</div>
+				</div>
+			</div>
+			<!-- ENDIF -->
+			
+			<!-- IF S_DISPLAY_PM -->
+				<a href="{U_PRIVATEMSGS}" class="msg">
+					<i class="fa fa-envelope"></i>
+					<!-- IF PRIVATE_MESSAGE_COUNT eq '0' -->
+						<!-- ELSE -->
+						<small>{PRIVATE_MESSAGE_COUNT}</small>
+					<!-- ENDIF -->
+				</a>
+			<!-- ENDIF -->
+			
+			<div class="dropdown member-profile">
+				<a href="#" class="member-profile--toggle" data-toggle="dropdown">
+					<!-- IF CURRENT_USER_AVATAR -->
+						{CURRENT_USER_AVATAR}
+						<!-- ELSE -->
+						<img src="{T_THEME_PATH}/images/no-avatar.png" alt="" class="img-responsive" />
+					<!-- ENDIF -->
+					<span class="caret"></span>
+				</a>
+				<div class="dropdown-menu header-member-profile--info">
+					<h4>{S_USERNAME}</h4>
+					<ul>
+						<li><a href="{U_PROFILE}"><i class="fa fm fa-dashboard"></i>{L_PROFILE}</a></li>
+						<li><a href="{U_USER_PROFILE}"><i class="fa fm fa-user"></i>{L_READ_PROFILE}</a></li>
+						<li><a href="{U_LOGIN_LOGOUT}"><i class="fa fa-flip-horizontal fm fa-sign-out"></i>{L_LOGIN_LOGOUT}</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<!-- EVENT navbar_header_user_profile_append -->
+		<!-- ENDIF -->
+		
+		<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
+		<div class="header--search-bar<!-- IF not S_REGISTERED_USER --> logged-out<!-- ENDIF -->">
+			<form action="{U_SEARCH}" method="get">
+				<div class="input-group">
+					<input type="text" name="keywords" class="form-control" placeholder="{L_SEARCH_MINI}">
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+						<a href="{U_SEARCH}" class="btn btn-default"><i class="fa fa-gear"></i></a>
+					</span>
+				</div>
+			</form>
+		</div>
+		<!-- ENDIF -->
+		
+		<ul class="header-nav--primary nav<!-- IF not S_REGISTERED_USER --> logged-out<!-- ENDIF -->">
+			<li>
+				<a href="#tab1" data-toggle="tab"><i class="fa fm fa-navicon"></i>Quick Links</a>
+			</li>
+			
+			<!-- IF U_ACP -->
+				<li>
+					<a href="{U_ACP}"><i class="fa fm fa-gears"></i>{L_ACP_SHORT}</a>
+				</li>
+			<!-- ENDIF -->
+			<!-- IF U_MCP -->
+				<li><a href="{U_MCP}"><i class="fa fm fa-cog"></i>{L_MCP_SHORT}</a></li>
+			<!-- ENDIF -->
+		</ul>
+	</div>
+	
+	<div class="header-nav--tab">
+		<div class="container">
+			<div class="tab-content">
+				<div class="header-nav--tabpane tab-pane" id="tab1">
+					<ul class="nav">
+						<!-- EVENT navbar_header_quick_links_before -->
+						
+						<!-- IF S_DISPLAY_SEARCH -->
+							<!-- IF S_USER_LOGGED_IN -->
+								<li><a href="{U_SEARCH_NEW}"><i class="fa fm fa-folder-o"></i>{L_SEARCH_NEW}</a></li>
+							<!-- ENDIF -->
+							<!-- IF S_REGISTERED_USER -->
+								<li><a href="{U_SEARCH_SELF}"><i class="fa fm fa-edit"></i>{L_SEARCH_SELF}</a></li>
+							<!-- ENDIF -->
+							<!-- IF S_LOAD_UNREADS --> 
+								<li><a href="{U_SEARCH_UNREAD}"><i class="fa fm fa-eye-slash"></i>{L_SEARCH_UNREAD}</a></li>
+							<!-- ENDIF -->
+							<li><a href="{U_SEARCH_UNANSWERED}"><i class="fa fm fa-comment-o"></i>{L_SEARCH_UNANSWERED}</a></li>
+							<li><a href="{U_SEARCH_ACTIVE_TOPICS}"><i class="fa fm fa-comments-o"></i>{L_SEARCH_ACTIVE_TOPICS}</a></li>
+							<li><a href="{U_SEARCH}"><i class="fa fm fa-search"></i>{L_SEARCH}</a></li>
+						<!-- ENDIF -->
+
+						<!-- IF U_TEAM -->
+							<li><a href="{U_TEAM}"><i class="fa fm fa-users"></i>{L_THE_TEAM}</a></li>
+						<!-- ENDIF -->
+						
+						<!-- EVENT navbar_header_quick_links_after -->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Header Navbar End -->

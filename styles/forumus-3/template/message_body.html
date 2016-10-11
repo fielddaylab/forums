@@ -1,0 +1,136 @@
+<!-- IF S_SIMPLE_MESSAGE -->
+	<!-- INCLUDE simple_header.html -->
+<!-- ELSE -->
+	<!-- INCLUDE overall_header.html -->
+<!-- ENDIF -->
+		
+        <!-- Topic Area Start -->
+        <div id="topic">
+            <div class="container">
+                <div class="row">
+                    <!-- Topic Items Start -->
+                    <div class="topic--body">
+						<!-- EVENT overall_header_breadcrumbs_before -->
+                        <!-- Topic Breadcrumb Start -->
+                        <div class="topic--breadcrumb clearfix">
+                            <ol class="breadcrumb">
+                                <li><i class="fa fa-home"></i></li>
+
+                                <!-- IF SCRIPT_NAME eq 'index' -->
+                                        <li class="active">{SITENAME}</li>
+                                    <!-- ELSE -->
+                                        <!-- IF U_SITE_HOME -->
+                                            <li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+                                            <!-- ELSE -->
+                                            <li><a href="{U_INDEX}">{SITENAME}</a></li>
+                                        <!-- ENDIF -->
+                                <!-- ENDIF -->
+
+                                <!-- BEGIN navlinks -->
+                                    <!-- EVENT overall_header_navlink_prepend -->
+
+                                    <!-- IF not navlinks.S_LAST_ROW -->
+                                        <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                        <!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+                                        <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                        <!-- ELSE -->
+                                        <li class="active">{navlinks.FORUM_NAME}</li>
+                                    <!-- ENDIF -->
+
+                                    <!-- EVENT overall_header_navlink_append -->
+                                <!-- END navlinks -->
+
+                                <!-- IF S_VIEWTOPIC -->
+                                    <li class="active">{PAGE_TITLE}</li>
+                                    <!-- ELSEIF S_IN_FAQ -->
+                                    <li class="active">{L_FAQ}</li>
+                                    <!-- ELSEIF S_IN_MCP -->
+                                    <li class="active">{L_MCP}</li>
+                                    <!-- ELSEIF S_IN_UCP -->
+                                    <li class="active">{L_UCP}</li>
+                                    <!-- ELSEIF S_IN_SEARCH -->
+                                    <li class="active">{L_SEARCH}</li>
+                                <!-- ENDIF -->
+                            </ol>
+                        </div>
+                        <!-- Topic Breadcrumb End -->
+						<!-- EVENT overall_header_breadcrumbs_after -->
+
+						
+						<div class="topic--list">
+							<div class="topic-list--header clearfix">
+								<span class="topic-list-header--title"><i class="fa fa-file-text-o"></i>
+									{MESSAGE_TITLE}
+								</span>
+							</div>
+							<div class="topic-list--content">
+								<ul>
+									<li>
+										<p class="message">{MESSAGE_TEXT}</p>
+										
+										<!-- IF SCRIPT_NAME == "search" and not S_BOARD_DISABLED and not S_NO_SEARCH and L_RETURN_TO_SEARCH_ADV -->
+											<p><a href="{U_SEARCH}" class="arrow-{S_CONTENT_FLOW_BEGIN}">{L_GO_TO_SEARCH_ADV}</a></p>
+										<!-- ENDIF -->
+									</li>
+								</ul>
+							</div>
+						</div>
+						
+						
+						<!-- EVENT overall_header_breadcrumbs_before -->
+                        <!-- Topic Breadcrumb Start -->
+                        <div class="topic--breadcrumb clearfix">
+                            <ol class="breadcrumb">
+                                <li><i class="fa fa-home"></i></li>
+
+                                <!-- IF SCRIPT_NAME eq 'index' -->
+                                        <li class="active">{SITENAME}</li>
+                                    <!-- ELSE -->
+                                        <!-- IF U_SITE_HOME -->
+                                            <li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+                                            <!-- ELSE -->
+                                            <li><a href="{U_INDEX}">{SITENAME}</a></li>
+                                        <!-- ENDIF -->
+                                <!-- ENDIF -->
+
+                                <!-- BEGIN navlinks -->
+                                    <!-- EVENT overall_header_navlink_prepend -->
+
+                                    <!-- IF not navlinks.S_LAST_ROW -->
+                                        <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                        <!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+                                        <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                        <!-- ELSE -->
+                                        <li class="active">{navlinks.FORUM_NAME}</li>
+                                    <!-- ENDIF -->
+
+                                    <!-- EVENT overall_header_navlink_append -->
+                                <!-- END navlinks -->
+
+                                <!-- IF S_VIEWTOPIC -->
+                                    <li class="active">{PAGE_TITLE}</li>
+                                    <!-- ELSEIF S_IN_FAQ -->
+                                    <li class="active">{L_FAQ}</li>
+                                    <!-- ELSEIF S_IN_MCP -->
+                                    <li class="active">{L_MCP}</li>
+                                    <!-- ELSEIF S_IN_UCP -->
+                                    <li class="active">{L_UCP}</li>
+                                    <!-- ELSEIF S_IN_SEARCH -->
+                                    <li class="active">{L_SEARCH}</li>
+                                <!-- ENDIF -->
+                            </ol>
+                        </div>
+                        <!-- Topic Breadcrumb End -->
+						<!-- EVENT overall_header_breadcrumbs_after -->
+                    </div>
+                    <!-- Topic Items End -->
+                </div>
+            </div>
+        </div>
+        <!-- Topic Area End -->
+
+<!-- IF S_SIMPLE_MESSAGE -->
+	<!-- INCLUDE simple_footer.html -->
+<!-- ELSE -->
+	<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

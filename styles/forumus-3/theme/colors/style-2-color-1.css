@@ -1,0 +1,13 @@
+/*
+	phpBB3 Style Sheet
+    --------------------------------------------------------------
+	Style name:			ForumX
+	Based on style:		prosilver (the default phpBB 3.1.x style)
+	Author:				ThemeLooks ( https://themeloooks.com/ )
+    --------------------------------------------------------------
+*/
+
+/* BACKGROUND-COLOR: DARKER */
+#topic {
+    background-color: #243240;
+}

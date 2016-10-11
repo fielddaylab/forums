@@ -1,0 +1,96 @@
+<!-- BEGIN forumrow -->
+	<!-- IF (forumrow.S_IS_CAT and not forumrow.S_FIRST_ROW) or forumrow.S_NO_CAT  -->
+				</ul>
+			</div>
+		</div>
+	<!-- ENDIF -->
+
+	<!-- EVENT forumlist_body_category_header_before -->
+		<!-- IF forumrow.S_IS_CAT or forumrow.S_FIRST_ROW  or forumrow.S_NO_CAT  -->
+			<div class="topic--list">
+				<div class="topic-list--header clearfix">
+					<!-- IF forumrow.S_IS_CAT -->
+						<a href="{forumrow.U_VIEWFORUM}" class="topic-list-header--title"><i class="fa fa-file-text-o"></i>{forumrow.FORUM_NAME}</a>
+						<!-- ELSE -->
+						<span class="topic-list-header--title"><i class="fa fa-file-text-o"></i>{L_FORUM}</span>
+					<!-- ENDIF -->
+					<span class="topic-list-header--toggle-btn"><i class="fa fa-minus"></i></span>
+				</div>
+				<div class="topic-list--content">
+					<ul>
+		<!-- ENDIF -->
+	<!-- EVENT forumlist_body_category_header_after -->
+
+	<!-- IF not forumrow.S_IS_CAT -->
+		<!-- EVENT forumlist_body_forum_row_before -->
+			<li>
+				<!-- EVENT forumlist_body_forum_row_prepend -->
+					<div class="topic-list-content--icon">
+				        <!-- IF forumrow.S_LOCKED_FORUM -->
+						        <i class="fa fa-lock"></i>
+				            <!-- ELSEIF forumrow.S_IS_LINK -->
+						        <i class="fa fa-chain"></i>
+				            <!-- ELSE -->
+						        <i class="fa fa-comments-o"></i>
+				        <!-- ENDIF -->
+					</div>
+					
+					<div class="topic-list-content--title<!-- IF not forumrow.FORUM_DESC --> no-desc<!-- ENDIF -->">
+						<h2><a href="{forumrow.U_VIEWFORUM}">{forumrow.FORUM_NAME}</a></h2>
+						<!-- IF forumrow.FORUM_DESC -->
+							<p>{forumrow.FORUM_DESC}</p>
+						<!-- ENDIF -->
+					</div>
+						
+					<!-- IF forumrow.CLICKS -->
+						<!-- ELSEIF not forumrow.S_IS_LINK -->
+							<div class="topic-list-content--meta">
+								<!-- IF forumrow.LAST_POST_TIME -->
+										<!-- IF forumrow.S_DISPLAY_SUBJECT -->
+											<!-- EVENT forumlist_body_last_post_title_prepend -->
+												<a href="{forumrow.U_LAST_POST}" class="recent-post">{forumrow.LAST_POST_SUBJECT_TRUNCATED}</a>
+										<!-- ENDIF -->
+										
+										<span class="recent-post-time">{L_by} {forumrow.LAST_POSTER_FULL} {forumrow.LAST_POST_TIME}</span>
+									<!-- ELSE -->
+										<span class="no-posts">No Posts</span>
+								<!-- ENDIF -->
+							</div>
+					<!-- ENDIF -->
+
+					<!-- IF forumrow.CLICKS -->
+						<!-- ELSEIF not forumrow.S_IS_LINK -->
+							<div class="topic-list-content--stats">
+								<p><strong>{forumrow.TOPICS}</strong>{L_TOPICS}</p>
+								<p><strong>{forumrow.POSTS}</strong>{L_POSTS}</p>
+							</div>
+					<!-- ENDIF -->
+											
+					<!-- IF S_ENABLE_FEEDS and forumrow.S_FEED_ENABLED -->
+						<div class="topic-list-content--rss">
+							<a href="{U_FEED}?f={forumrow.FORUM_ID}"><i class="fa fa-rss"></i></a>
+						</div>
+					<!-- ENDIF -->
+				<!-- EVENT forumlist_body_forum_row_append -->
+			</li>
+		<!-- EVENT forumlist_body_forum_row_after -->
+	<!-- ENDIF -->
+
+	<!-- IF forumrow.S_LAST_ROW -->
+			    </ul>
+			</div>
+		</div>
+	<!-- EVENT forumlist_body_last_row_after -->
+	<!-- ENDIF -->
+	
+	<!-- BEGINELSE -->
+		<div class="topic--list">
+			<div class="topic-list--content">
+				<ul>
+					<li>
+						<p class="message">{L_NO_FORUMS}</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+<!-- END forumrow -->

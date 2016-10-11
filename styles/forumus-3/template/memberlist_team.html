@@ -1,0 +1,195 @@
+<!-- INCLUDE overall_header.html -->
+   
+    <div id="topic">
+        <div class="container">
+            <div class="topic--body">
+                <!-- Topic Breadcrumb Start -->
+                <div class="topic--breadcrumb clearfix">
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i></li>
+
+                        <!-- IF SCRIPT_NAME eq 'index' -->
+                                <li class="active">{SITENAME}</li>
+                            <!-- ELSE -->
+                                <!-- IF U_SITE_HOME -->
+                                    <li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+                                    <!-- ELSE -->
+                                    <li><a href="{U_INDEX}">{SITENAME}</a></li>
+                                <!-- ENDIF -->
+                        <!-- ENDIF -->
+
+                        <!-- BEGIN navlinks -->
+                            <!-- EVENT overall_header_navlink_prepend -->
+
+                            <!-- IF not navlinks.S_LAST_ROW -->
+                                <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                <!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+                                <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                <!-- ELSE -->
+                                <li class="active">{navlinks.FORUM_NAME}</li>
+                            <!-- ENDIF -->
+
+                            <!-- EVENT overall_header_navlink_append -->
+                        <!-- END navlinks -->
+
+                        <!-- IF S_VIEWTOPIC -->
+                            <li class="active">{PAGE_TITLE}</li>
+                            <!-- ELSEIF S_IN_FAQ -->
+                            <li class="active">{L_FAQ}</li>
+                            <!-- ELSEIF S_IN_MCP -->
+                            <li class="active">{L_MCP}</li>
+                            <!-- ELSEIF S_IN_UCP -->
+                            <li class="active">{L_UCP}</li>
+                            <!-- ELSEIF S_IN_SEARCH -->
+                            <li class="active">{L_SEARCH}</li>
+                        <!-- ENDIF -->
+                    </ol>
+
+                    <!-- IF S_DISPLAY_JUMPBOX -->
+                        <div class="topiclist-jumpbox--dropdown dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- IF S_IN_MCP and S_MERGE_SELECT -->
+                                        {L_SELECT_TOPICS_FROM}
+                                    <!-- ELSEIF S_IN_MCP -->
+                                        {L_MODERATE_FORUM}
+                                    <!-- ELSE -->
+                                        {L_JUMP_TO}
+                                <!-- ENDIF -->
+                                <span class="caret"></span>
+                            </a>
+
+                            <div class="topiclist-jumpbox-dropdown--menu dropdown-menu">
+                                <ul>
+                                    <!-- BEGIN jumpbox_forums -->
+                                        <!-- IF jumpbox_forums.FORUM_ID neq -1 -->
+                                            <li><a href="{jumpbox_forums.LINK}"><!-- BEGIN level --><span></span><!-- END level -->{jumpbox_forums.FORUM_NAME}</a></li>
+                                        <!-- ENDIF -->
+                                    <!-- END jumpbox_forums -->
+                                </ul>
+                            </div>
+                        </div>
+                    <!-- ENDIF -->
+                </div>
+                <!-- Topic Breadcrumb End -->
+               
+                <div class="topic--list">
+                    <div class="topic-list--header clearfix">
+                        <span class="topic-list-header--title"><i class="fa fa-users"></i>{PAGE_TITLE}</span>
+                    </div>
+                    <div class="topic-list--content team-page">
+                        <form method="post" action="{S_MODE_ACTION}">
+                            <ul>
+                                <!-- BEGIN group -->
+                                    <li>
+                                        <div class="forumbg forumbg-table">
+                                            <div class="inner">
+                                                <table class="table1" id="team">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="name" data-dfn="{L_RANK}{L_COMMA_SEPARATOR}{L_USERNAME}"><span class="rank-img">{L_RANK}&nbsp;</span><!-- IF group.U_GROUP --><a href="{group.U_GROUP}">{group.GROUP_NAME}</a><!-- ELSE -->{group.GROUP_NAME}<!-- ENDIF --></th>
+                                                            <th class="info">{L_PRIMARY_GROUP}</th>
+                                                            <!-- IF S_DISPLAY_MODERATOR_FORUMS --><th class="info">{L_MODERATOR}</th><!-- ENDIF -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- BEGIN user -->
+                                                            <tr class="<!-- IF group.user.S_ROW_COUNT is even -->bg1<!-- ELSE -->bg2<!-- ENDIF --><!-- IF group.user.S_INACTIVE --> inactive<!-- ENDIF -->">
+                                                                <td><!-- IF group.user.RANK_IMG --><span class="rank-img">{group.user.RANK_IMG}</span><!-- ELSE --><span class="rank-img">{group.user.RANK_TITLE}</span><!-- ENDIF -->{group.user.USERNAME_FULL}<!-- IF group.user.S_INACTIVE --> ({L_INACTIVE})<!-- ENDIF --></td>
+                                                                <td class="info"><!-- IF group.user.U_GROUP -->
+                                                                    <a<!-- IF group.user.GROUP_COLOR --> style="font-weight: bold; color: #{group.user.GROUP_COLOR}"<!-- ENDIF --> href="{group.user.U_GROUP}">{group.user.GROUP_NAME}</a>
+                                                                    <!-- ELSE -->
+                                                                        {group.user.GROUP_NAME}
+                                                                    <!-- ENDIF --></td>
+                                                                <!-- IF S_DISPLAY_MODERATOR_FORUMS -->
+                                                                    <td class="info"><!-- IF group.user.FORUM_OPTIONS --><select style="width: 100%;">{group.user.FORUMS}</select><!-- ELSEIF group.user.FORUMS -->{group.user.FORUMS}<!-- ELSE -->-<!-- ENDIF --></td>
+                                                                <!-- ENDIF -->
+                                                            </tr>
+                                                        <!-- BEGINELSE -->
+                                                            <tr class="bg1">
+                                                                <td colspan="3"><strong>{L_NO_MEMBERS}</strong></td>
+                                                            </tr>
+                                                        <!-- END user -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <!-- END group -->
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+						
+                <!-- Topic Breadcrumb Start -->
+                <div class="topic--breadcrumb clearfix">
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i></li>
+
+                        <!-- IF SCRIPT_NAME eq 'index' -->
+                                <li class="active">{SITENAME}</li>
+                            <!-- ELSE -->
+                                <!-- IF U_SITE_HOME -->
+                                    <li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+                                    <!-- ELSE -->
+                                    <li><a href="{U_INDEX}">{SITENAME}</a></li>
+                                <!-- ENDIF -->
+                        <!-- ENDIF -->
+
+                        <!-- BEGIN navlinks -->
+                            <!-- EVENT overall_header_navlink_prepend -->
+
+                            <!-- IF not navlinks.S_LAST_ROW -->
+                                <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                <!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+                                <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                <!-- ELSE -->
+                                <li class="active">{navlinks.FORUM_NAME}</li>
+                            <!-- ENDIF -->
+
+                            <!-- EVENT overall_header_navlink_append -->
+                        <!-- END navlinks -->
+
+                        <!-- IF S_VIEWTOPIC -->
+                            <li class="active">{PAGE_TITLE}</li>
+                            <!-- ELSEIF S_IN_FAQ -->
+                            <li class="active">{L_FAQ}</li>
+                            <!-- ELSEIF S_IN_MCP -->
+                            <li class="active">{L_MCP}</li>
+                            <!-- ELSEIF S_IN_UCP -->
+                            <li class="active">{L_UCP}</li>
+                            <!-- ELSEIF S_IN_SEARCH -->
+                            <li class="active">{L_SEARCH}</li>
+                        <!-- ENDIF -->
+                    </ol>
+
+                    <!-- IF S_DISPLAY_JUMPBOX -->
+                        <div class="topiclist-jumpbox--dropup dropup">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- IF S_IN_MCP and S_MERGE_SELECT -->
+                                        {L_SELECT_TOPICS_FROM}
+                                    <!-- ELSEIF S_IN_MCP -->
+                                        {L_MODERATE_FORUM}
+                                    <!-- ELSE -->
+                                        {L_JUMP_TO}
+                                <!-- ENDIF -->
+                                <span class="caret"></span>
+                            </a>
+
+                            <div class="topiclist-jumpbox-dropup--menu dropdown-menu">
+                                <ul>
+                                    <!-- BEGIN jumpbox_forums -->
+                                        <!-- IF jumpbox_forums.FORUM_ID neq -1 -->
+                                            <li><a href="{jumpbox_forums.LINK}"><!-- BEGIN level --><span></span><!-- END level -->{jumpbox_forums.FORUM_NAME}</a></li>
+                                        <!-- ENDIF -->
+                                    <!-- END jumpbox_forums -->
+                                </ul>
+                            </div>
+                        </div>
+                    <!-- ENDIF -->
+                </div>
+                <!-- Topic Breadcrumb End -->
+            </div>
+        </div>
+    </div>
+
+<!-- INCLUDE overall_footer.html -->

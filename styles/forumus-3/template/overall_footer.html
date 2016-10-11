@@ -1,0 +1,73 @@
+        <!-- Footer Area Start -->
+        <div id="footer">
+        	<div class="container">
+        		<div class="footer-logos">
+        		    <a href="http://www.wisc.edu/">
+        		    	<img class="footer-logo" src="https://fielddaylab.wisc.edu/courses/assets/UW-logo.png" alt="University of Wisconsin&mdash;Madison">
+    		    	</a>
+    				<a href="http://wid.wisc.edu/">
+    					<img class="footer-logo" src="https://fielddaylab.wisc.edu/courses/assets/wid-logo.png" alt="Wisconsin Institute for Discovery">
+					</a>
+    				<a href="http://dpi.wi.gov/">
+      					<img class="footer-logo" src="https://fielddaylab.wisc.edu/courses/assets/dpilogo-white.png" alt="Wisconsin Department of Public Instruction">
+					</a>
+        		</div>
+        	</div>
+        </div>
+        <!-- Footer Area End -->
+
+		<!-- IF not S_REGISTERED_USER -->
+			<!-- Login Form Modal Start -->
+			<div id="LoginForm" class="modal fade">
+				<div class="vc-parent">
+					<div class="vc-child">
+						<div class="modal-overlay" data-dismiss="modal"></div>
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<div class="modal-header">
+									<i class="fa fa-user"></i>Login
+								</div>
+								<div class="modal-body">
+									<!-- IF not S_USER_LOGGED_IN and not S_IS_BOT -->
+									<form action="{S_LOGIN_ACTION}" method="post">
+										<input type="text" name="username" placeholder="{L_USERNAME}" class="form-control" />
+										<input type="password" name="password" placeholder="{L_PASSWORD}" class="form-control" />
+										<input type="submit" name="login" value="{L_LOGIN}" class="submit-btn" />
+										{S_LOGIN_REDIRECT}
+									</form>
+
+									<a class="links" href="http://fielddaylab.wisc.edu/auth/index.html?action=reset">Forgot Password?</a><!-- {L_FORGOT_PASS} -->
+									<!-- ENDIF -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Login Form Modal End -->
+		<!-- ENDIF -->
+	</div>
+	<!-- Wrapper End -->
+
+	<script type="text/javascript" src="{T_JQUERY_LINK}"></script>
+	<!-- IF S_ALLOW_CDN --><script type="text/javascript">window.jQuery || document.write('\x3Cscript src="{T_ASSETS_PATH}/javascript/jquery.min.js?assets_version={T_ASSETS_VERSION}">\x3C/script>');</script><!-- ENDIF -->
+	<script type="text/javascript" src="{T_ASSETS_PATH}/javascript/core.js?assets_version={T_ASSETS_VERSION}"></script>
+	<!-- INCLUDEJS forum_fn.js -->
+	<!-- INCLUDEJS ajax.js -->
+	<!-- INCLUDEJS bootstrap.min.js -->
+	<!-- INCLUDEJS jquery.validate.min.js -->
+	<!-- INCLUDEJS jparticle.jquery.min.js -->
+	<!-- INCLUDEJS custom-color-switcher.js -->
+	<!-- INCLUDEJS jquery.sticky.min.js -->
+	<!-- INCLUDEJS main.js -->
+
+	<!-- EVENT overall_footer_after -->
+
+	<!-- IF S_PLUPLOAD --><!-- INCLUDE plupload.html --><!-- ENDIF -->
+	{$SCRIPTS}
+
+	<!-- EVENT overall_footer_body_after -->
+
+</body>
+</html>

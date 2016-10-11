@@ -1,0 +1,44 @@
+<!-- Topic Breadcrumb Start -->
+<div class="topic--breadcrumb clearfix">
+	<ol class="breadcrumb">
+		<li><i class="fa fa-home"></i></li>
+		
+		<!-- IF SCRIPT_NAME eq 'index' -->
+				<li class="active">{SITENAME}</li>
+			<!-- ELSE -->
+				<!-- IF U_SITE_HOME -->
+					<li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+					<!-- ELSE -->
+					<li><a href="{U_INDEX}">{SITENAME}</a></li>
+				<!-- ENDIF -->
+		<!-- ENDIF -->
+		
+		<!-- BEGIN navlinks -->
+			<!-- EVENT overall_header_navlink_prepend -->
+			
+			<!-- IF not navlinks.S_LAST_ROW -->
+				<li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+				<!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+				<li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+				<!-- ELSE -->
+				<li class="active">{navlinks.FORUM_NAME}</li>
+			<!-- ENDIF -->
+			
+			<!-- EVENT overall_header_navlink_append -->
+		<!-- END navlinks -->
+		
+		<!-- IF S_VIEWTOPIC -->
+			<li class="active">{PAGE_TITLE}</li>
+			<!-- ELSEIF S_IN_FAQ -->
+			<li class="active">{L_FAQ}</li>
+			<!-- ELSEIF S_IN_MCP -->
+			<li class="active">{L_MCP}</li>
+			<!-- ELSEIF S_IN_UCP -->
+			<li class="active">{L_UCP}</li>
+			<!-- ELSEIF S_IN_SEARCH -->
+			<li class="active">{L_SEARCH}</li>
+		<!-- ENDIF -->
+	</ol>
+	<!-- <button type="button" class="toggle-sidebar"><i class="fa fa-reorder"></i></button> -->
+</div>
+<!-- Topic Breadcrumb End -->

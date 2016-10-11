@@ -1,0 +1,497 @@
+<!-- INCLUDE overall_header.html -->
+
+<div id="topic">
+	<div class="container">
+		<div class="topic--body">
+			<!-- Topic Breadcrumb Start -->
+			<div class="topic--breadcrumb clearfix">
+				<ol class="breadcrumb">
+					<li><i class="fa fa-home"></i></li>
+					
+					<!-- IF SCRIPT_NAME eq 'index' -->
+							<li class="active">{SITENAME}</li>
+						<!-- ELSE -->
+							<!-- IF U_SITE_HOME -->
+								<li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+								<!-- ELSE -->
+								<li><a href="{U_INDEX}">{SITENAME}</a></li>
+							<!-- ENDIF -->
+					<!-- ENDIF -->
+					
+					<!-- BEGIN navlinks -->
+						<!-- EVENT overall_header_navlink_prepend -->
+						
+						<!-- IF not navlinks.S_LAST_ROW -->
+							<li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+							<!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+							<li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+							<!-- ELSE -->
+							<li class="active">{navlinks.FORUM_NAME}</li>
+						<!-- ENDIF -->
+						
+						<!-- EVENT overall_header_navlink_append -->
+					<!-- END navlinks -->
+					
+					<!-- IF S_VIEWTOPIC -->
+						<li class="active">{PAGE_TITLE}</li>
+						<!-- ELSEIF S_IN_FAQ -->
+						<li class="active">{L_FAQ}</li>
+						<!-- ELSEIF S_IN_MCP -->
+						<li class="active">{L_MCP}</li>
+						<!-- ELSEIF S_IN_UCP -->
+						<li class="active">{L_UCP}</li>
+						<!-- ELSEIF S_IN_SEARCH -->
+						<li class="active">{L_SEARCH}</li>
+					<!-- ENDIF -->
+				</ol>
+			</div>
+			<!-- Topic Breadcrumb End -->
+
+			<!-- IF S_DISPLAY_POST_INFO or .pagination or TOTAL_POSTS or TOTAL_TOPICS -->
+				<div class="action-bar">
+					<div class="action-bar--pagination clearfix">
+						<!-- IF not S_IS_BOT and S_DISPLAY_REPLY_INFO -->
+							<!-- EVENT viewforum_buttons_bottom_before -->
+
+								<!-- IF S_IS_LOCKED -->
+										<span class="action-bar-pagination--new locked-icon">
+											<i class="fa fm fa-lock"></i>{L_BUTTON_TOPIC_LOCKED}
+										</span>
+									<!-- ELSE -->
+										<a href="{U_POST_REPLY_TOPIC}" class="action-bar-pagination--new post-icon">
+											<i class="fa fm fa-mail-reply"></i>{L_BUTTON_POST_REPLY}
+										</a>
+								<!-- ENDIF -->
+
+							<!-- EVENT viewforum_buttons_bottom_after -->
+						<!-- ENDIF -->
+
+						<!-- IF not S_IS_BOT and (U_WATCH_TOPIC or U_BOOKMARK_TOPIC or U_BUMP_TOPIC or U_EMAIL_TOPIC or U_PRINT_TOPIC or S_DISPLAY_TOPIC_TOOLS) -->
+							<div class="dropdown topic-tools">
+								<a href="#" data-toggle="dropdown">{L_TOPIC_TOOLS} <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<!-- EVENT viewtopic_topic_tools_before -->
+									<!-- IF U_WATCH_TOPIC -->
+										<li>
+											<a href="{U_WATCH_TOPIC}" data-ajax="toggle_link" data-toggle-text="{S_WATCH_TOPIC_TOGGLE}" data-toggle-url="{U_WATCH_TOPIC_TOGGLE}" data-update-all=".watch-topic-link">{S_WATCH_TOPIC_TITLE}</a>
+										</li>
+									<!-- ENDIF -->
+									<!-- IF U_BOOKMARK_TOPIC -->
+										<li>
+											<a href="{U_BOOKMARK_TOPIC}" data-ajax="alt_text" data-alt-text="{S_BOOKMARK_TOGGLE}" data-update-all=".bookmark-link">{S_BOOKMARK_TOPIC}</a>
+										</li>
+									<!-- ENDIF -->
+									<!-- IF U_BUMP_TOPIC --><li><a href="{U_BUMP_TOPIC}" data-ajax="true">{L_BUMP_TOPIC}</a></li><!-- ENDIF -->
+									<!-- IF U_EMAIL_TOPIC --><li><a href="{U_EMAIL_TOPIC}">{L_EMAIL_TOPIC}</a></li><!-- ENDIF -->
+									<!-- IF U_PRINT_TOPIC --><li><a href="{U_PRINT_TOPIC}">{L_PRINT_TOPIC}</a></li><!-- ENDIF -->
+									<!-- EVENT viewtopic_topic_tools_after -->
+								</ul>
+							</div>
+						<!-- ENDIF -->
+					
+						<!-- IF .quickmod -->
+							<div class="dropdown quick-mod-tools">
+								<a href="#" data-toggle="dropdown">{L_QUICK_MOD} <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<!-- BEGIN quickmod -->
+										<li><a href="{quickmod.LINK}" <!-- IF $QUICKMOD_AJAX --> data-ajax="true" data-refresh="true"<!-- ENDIF -->>{quickmod.TITLE}</a></li>
+									<!-- END quickmod -->
+								</ul>
+							</div>
+						<!-- ENDIF -->
+						
+						<span class="action-bar-pagination--topics view-topic">{TOTAL_POSTS}</span>
+
+						<!-- IF .pagination or TOTAL_POSTS -->
+							<!-- IF .pagination -->
+								<!-- INCLUDE pagination.html -->
+							<!-- ELSE -->
+								<span class="action-bar-pagination--page-num view-topic">
+								    {PAGE_NUMBER}
+								</span>
+							<!-- ENDIF -->
+						<!-- ENDIF -->
+					</div>
+				</div>
+			<!-- ENDIF -->
+
+			<div class="topic--list">
+				<div class="topic-list--header clearfix">
+					<span class="topic-list-header--title">
+					    <!-- EVENT viewtopic_topic_title_prepend -->
+					        {TOPIC_TITLE}
+				        <!-- EVENT viewtopic_topic_title_append -->
+				    </span>
+				</div>
+				<div class="topic-list--content">
+					<ul>
+						<!-- BEGIN postrow -->
+							<li>
+								<!-- EVENT viewtopic_body_postrow_post_before -->
+								<!-- IF postrow.S_FIRST_UNREAD -->
+									<a id="unread" class="anchor"<!-- IF S_UNREAD_VIEW --> data-url="{postrow.U_MINI_POST}"<!-- ENDIF -->></a>
+								<!-- ENDIF -->
+
+								<div id="p{postrow.POST_ID}" class="topic--post post has-profile<!-- IF postrow.S_UNREAD_POST --> unreadpost<!-- ENDIF --><!-- IF postrow.S_POST_REPORTED --> reported<!-- ENDIF --><!-- IF postrow.S_POST_DELETED --> deleted<!-- ENDIF --><!-- IF postrow.S_ONLINE and not postrow.S_POST_HIDDEN --> online<!-- ENDIF --><!-- IF postrow.POSTER_WARNINGS --> warned<!-- ENDIF -->">
+									<dl class="postprofile" id="profile{postrow.POST_ID}"<!-- IF postrow.S_POST_HIDDEN --> style="display: none;"<!-- ENDIF -->>
+										<dt class="<!-- IF postrow.RANK_TITLE or postrow.RANK_IMG -->has-profile-rank<!-- ELSE -->no-profile-rank<!-- ENDIF --> <!-- IF postrow.POSTER_AVATAR -->has-avatar<!-- ELSE -->no-avatar<!-- ENDIF -->">
+											<div class="avatar-container">
+												<!-- EVENT viewtopic_body_avatar_before -->
+												<!-- IF postrow.POSTER_AVATAR -->
+													<!-- IF postrow.U_POST_AUTHOR --><a href="{postrow.U_POST_AUTHOR}" class="avatar">{postrow.POSTER_AVATAR}</a><!-- ELSE --><span class="avatar">{postrow.POSTER_AVATAR}</span><!-- ENDIF -->
+												<!-- ENDIF -->
+												<!-- EVENT viewtopic_body_avatar_after -->
+											</div>
+											<!-- EVENT viewtopic_body_post_author_before -->
+											<!-- IF not postrow.U_POST_AUTHOR --><strong>{postrow.POST_AUTHOR_FULL}</strong><!-- ELSE -->{postrow.POST_AUTHOR_FULL}<!-- ENDIF -->
+											<!-- EVENT viewtopic_body_post_author_after -->
+										</dt>
+
+										<!-- EVENT viewtopic_body_postrow_rank_before -->
+										<!-- IF postrow.RANK_TITLE or postrow.RANK_IMG --><dd class="profile-rank">{postrow.RANK_TITLE}<!-- IF postrow.RANK_TITLE and postrow.RANK_IMG --><br /><!-- ENDIF -->{postrow.RANK_IMG}</dd><!-- ENDIF -->
+										<!-- EVENT viewtopic_body_postrow_rank_after -->
+
+									<!-- IF postrow.POSTER_POSTS != '' --><dd class="profile-posts"><strong>{L_POSTS}{L_COLON}</strong> <!-- IF postrow.U_SEARCH !== '' --><a href="{postrow.U_SEARCH}"><!-- ENDIF -->{postrow.POSTER_POSTS}<!-- IF postrow.U_SEARCH !== '' --></a><!-- ENDIF --></dd><!-- ENDIF -->
+									<!-- IF postrow.POSTER_JOINED --><dd class="profile-joined"><strong>{L_JOINED}{L_COLON}</strong> {postrow.POSTER_JOINED}</dd><!-- ENDIF -->
+									<!-- IF postrow.POSTER_WARNINGS --><dd class="profile-warnings"><strong>{L_WARNINGS}{L_COLON}</strong> {postrow.POSTER_WARNINGS}</dd><!-- ENDIF -->
+
+									<!-- IF postrow.S_PROFILE_FIELD1 -->
+										<!-- Use a construct like this to include admin defined profile fields. Replace FIELD1 with the name of your field. -->
+										<dd><strong>{postrow.PROFILE_FIELD1_NAME}{L_COLON}</strong> {postrow.PROFILE_FIELD1_VALUE}</dd>
+									<!-- ENDIF -->
+
+									<!-- EVENT viewtopic_body_postrow_custom_fields_before -->
+									<!-- BEGIN custom_fields -->
+										<!-- IF not postrow.custom_fields.S_PROFILE_CONTACT -->
+											<dd class="profile-custom-field profile-{postrow.custom_fields.PROFILE_FIELD_IDENT}"><strong>{postrow.custom_fields.PROFILE_FIELD_NAME}{L_COLON}</strong> {postrow.custom_fields.PROFILE_FIELD_VALUE}</dd>
+										<!-- ENDIF -->
+									<!-- END custom_fields -->
+									<!-- EVENT viewtopic_body_postrow_custom_fields_after -->
+
+									<!-- EVENT viewtopic_body_contact_fields_before -->
+									<!-- IF not S_IS_BOT and .postrow.contact -->
+										<dd class="profile-contact">
+											<strong>{L_CONTACT}{L_COLON}</strong>
+											<div class="dropdown-container dropdown-left">
+												<a href="#" class="dropdown-trigger"><span class="imageset icon_contact" title="{postrow.CONTACT_USER}">{postrow.CONTACT_USER}</span></a>
+												<div class="dropdown">
+													<div class="pointer"><div class="pointer-inner"></div></div>
+													<div class="dropdown-contents contact-icons">
+														<!-- BEGIN contact -->
+															{% set REMAINDER = postrow.contact.S_ROW_COUNT % 4 %}
+															<!-- DEFINE $S_LAST_CELL = ((REMAINDER eq 3) or (postrow.contact.S_LAST_ROW and postrow.contact.S_NUM_ROWS < 4)) -->
+															<!-- IF REMAINDER eq 0 -->
+																<div>
+															<!-- ENDIF -->
+																<a href="<!-- IF postrow.contact.U_CONTACT -->{postrow.contact.U_CONTACT}<!-- ELSE -->{postrow.U_POST_AUTHOR}<!-- ENDIF -->" title="{postrow.contact.NAME}"<!-- IF $S_LAST_CELL --> class="last-cell"<!-- ENDIF --><!-- IF postrow.contact.ID eq 'jabber' --> onclick="popup(this.href, 750, 320); return false;"<!-- ENDIF -->>
+																	<span class="contact-icon {postrow.contact.ID}-icon">{postrow.contact.NAME}</span>
+																</a>
+															<!-- IF REMAINDER eq 3 or postrow.contact.S_LAST_ROW -->
+																</div>
+															<!-- ENDIF -->
+														<!-- END contact -->
+													</div>
+												</div>
+											</div>
+										</dd>
+									<!-- ENDIF -->
+									<!-- EVENT viewtopic_body_contact_fields_after -->
+
+									</dl>
+
+									<div class="postbody">
+										<!-- IF postrow.S_POST_HIDDEN -->
+											<!-- IF postrow.S_POST_DELETED -->
+												<div class="ignore" id="post_hidden{postrow.POST_ID}">
+													{postrow.L_POST_DELETED_MESSAGE}<br />
+													{postrow.L_POST_DISPLAY}
+												</div>
+											<!-- ELSEIF postrow.S_IGNORE_POST -->
+												<div class="ignore" id="post_hidden{postrow.POST_ID}">
+													{postrow.L_IGNORE_POST}<br />
+													{postrow.L_POST_DISPLAY}
+												</div>
+											<!-- ENDIF -->
+										<!-- ENDIF -->
+										<div id="post_content{postrow.POST_ID}"<!-- IF postrow.S_POST_HIDDEN --> style="display: none;"<!-- ENDIF -->>
+
+										<!-- EVENT viewtopic_body_post_subject_before -->
+										<h3 <!-- IF postrow.S_FIRST_ROW -->class="first"<!-- ENDIF -->><!-- IF postrow.POST_ICON_IMG --><img src="{T_ICONS_PATH}{postrow.POST_ICON_IMG}" width="{postrow.POST_ICON_IMG_WIDTH}" height="{postrow.POST_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="#post_content{postrow.POST_ID}">{postrow.POST_SUBJECT}</a></h3>
+
+									<!-- DEFINE $SHOW_POST_BUTTONS = (postrow.U_EDIT or postrow.U_DELETE or postrow.U_REPORT or postrow.U_WARN or postrow.U_INFO or postrow.U_QUOTE) -->
+									<!-- EVENT viewtopic_body_post_buttons_list_before -->
+									<!-- IF not S_IS_BOT -->
+										<!-- IF $SHOW_POST_BUTTONS -->
+											<ul class="post-buttons">
+												<!-- EVENT viewtopic_body_post_buttons_before -->
+												<!-- IF postrow.U_EDIT -->
+													<li>
+														<a href="{postrow.U_EDIT}" title="{L_EDIT_POST}" class="button icon-button edit-icon"><i class="fa fa-edit"></i></a>
+													</li>
+												<!-- ENDIF -->
+												<!-- IF postrow.U_DELETE -->
+													<li>
+														<a href="{postrow.U_DELETE}" title="{L_DELETE_POST}" class="button icon-button delete-icon"><i class="fa fa-trash"></i></a>
+													</li>
+												<!-- ENDIF -->
+												<!-- IF postrow.U_REPORT -->
+													<li>
+														<a href="{postrow.U_REPORT}" title="{L_REPORT_POST}" class="button icon-button report-icon"><i class="fa fa-flag"></i></a>
+													</li>
+												<!-- ENDIF -->
+												<!-- IF postrow.U_WARN -->
+													<li>
+														<a href="{postrow.U_WARN}" title="{L_WARN_USER}" class="button icon-button warn-icon"><i class="fa fa-warning"></i></a>
+													</li>
+												<!-- ENDIF -->
+												<!-- IF postrow.U_INFO -->
+													<li>
+														<a href="{postrow.U_INFO}" title="{L_INFORMATION}" class="button icon-button info-icon"><i class="fa fa-info"></i></a>
+													</li>
+												<!-- ENDIF -->
+												<!-- IF postrow.U_QUOTE -->
+													<li>
+														<a href="{postrow.U_QUOTE}" title="{L_REPLY_WITH_QUOTE}" class="button icon-button quote-icon"><i class="fa fa-quote-left"></i></a>
+													</li>
+												<!-- ENDIF -->
+												<!-- EVENT viewtopic_body_post_buttons_after -->
+											</ul>
+										<!-- ENDIF -->
+									<!-- ENDIF -->
+									<!-- EVENT viewtopic_body_post_buttons_list_after -->
+
+										<!-- EVENT viewtopic_body_postrow_post_details_before -->
+										<p class="author"><span class="responsive-hide">{L_POST_BY_AUTHOR} <strong>{postrow.POST_AUTHOR_FULL}</strong> &raquo; </span>{postrow.POST_DATE} </p>
+										<!-- EVENT viewtopic_body_postrow_post_details_after -->
+
+										<!-- IF postrow.S_POST_UNAPPROVED -->
+										<form method="post" class="mcp_approve" action="{postrow.U_APPROVE_ACTION}">
+											<p class="post-notice unapproved">
+												<strong>{L_POST_UNAPPROVED_ACTION}</strong>
+												<input class="button2" type="submit" value="{L_DISAPPROVE}" name="action[disapprove]" />
+												<input class="button1" type="submit" value="{L_APPROVE}" name="action[approve]" />
+												<input type="hidden" name="post_id_list[]" value="{postrow.POST_ID}" />
+												{S_FORM_TOKEN}
+											</p>
+										</form>
+										<!-- ELSEIF postrow.S_POST_DELETED -->
+										<form method="post" class="mcp_approve" action="{postrow.U_APPROVE_ACTION}">
+											<p class="post-notice deleted">
+												<strong>{L_POST_DELETED_ACTION}</strong>
+												<!-- IF postrow.S_DELETE_PERMANENT -->
+													<input class="button2" type="submit" value="{L_DELETE}" name="action[delete]" />
+												<!-- ENDIF -->
+												<input class="button1" type="submit" value="{L_RESTORE}" name="action[restore]" />
+												<input type="hidden" name="post_id_list[]" value="{postrow.POST_ID}" />
+												{S_FORM_TOKEN}
+											</p>
+										</form>
+										<!-- ENDIF -->
+
+										<!-- IF postrow.S_POST_REPORTED -->
+										<p class="post-notice reported">
+											<a href="{postrow.U_MCP_REPORT}"><strong>{L_POST_REPORTED}</strong></a>
+										</p>
+										<!-- ENDIF -->
+
+										<div class="content">{postrow.MESSAGE}</div>
+
+										<!-- IF postrow.S_HAS_ATTACHMENTS -->
+											<dl class="attachbox">
+												<dt>
+													{L_ATTACHMENTS}
+												</dt>
+												<!-- BEGIN attachment -->
+													<dd>{postrow.attachment.DISPLAY_ATTACHMENT}</dd>
+												<!-- END attachment -->
+											</dl>
+										<!-- ENDIF -->
+
+										<!-- EVENT viewtopic_body_postrow_post_notices_before -->
+										<!-- IF postrow.S_DISPLAY_NOTICE --><div class="rules">{L_DOWNLOAD_NOTICE}</div><!-- ENDIF -->
+										<!-- IF postrow.DELETED_MESSAGE or postrow.DELETE_REASON -->
+											<div class="notice post_deleted_msg">
+												{postrow.DELETED_MESSAGE}
+												<!-- IF postrow.DELETE_REASON --><br /><strong>{L_REASON}{L_COLON}</strong> <em>{postrow.DELETE_REASON}</em><!-- ENDIF -->
+											</div>
+										<!-- ELSEIF postrow.EDITED_MESSAGE or postrow.EDIT_REASON -->
+											<div class="notice">
+												{postrow.EDITED_MESSAGE}
+												<!-- IF postrow.EDIT_REASON --><br /><strong>{L_REASON}{L_COLON}</strong> <em>{postrow.EDIT_REASON}</em><!-- ENDIF -->
+											</div>
+										<!-- ENDIF -->
+
+										<!-- IF postrow.BUMPED_MESSAGE --><div class="notice"><br /><br />{postrow.BUMPED_MESSAGE}</div><!-- ENDIF -->
+										<!-- EVENT viewtopic_body_postrow_post_notices_after -->
+										<!-- IF postrow.SIGNATURE --><div id="sig{postrow.POST_ID}" class="signature">{postrow.SIGNATURE}</div><!-- ENDIF -->
+
+										<!-- EVENT viewtopic_body_postrow_post_content_footer -->
+										</div>
+
+									</div>
+
+									<!-- EVENT viewtopic_body_postrow_back2top_before -->
+									<div class="back2top"><!-- EVENT viewtopic_body_postrow_back2top_prepend --><a href="#top" title="{L_BACK_TO_TOP}"><i class="fa fa-angle-double-up"></i></a><!-- EVENT viewtopic_body_postrow_back2top_append --></div>
+									<!-- EVENT viewtopic_body_postrow_back2top_after -->
+								</div>
+							</li>
+							<!-- EVENT viewtopic_body_postrow_post_after -->
+						<!-- END postrow -->
+					</ul>
+				</div>
+			</div>
+
+			<!-- IF S_NUM_POSTS > 1 or .pagination -->
+				<div class="display-options-bar">
+					<form method="post" action="{S_TOPIC_ACTION}">
+						<fieldset class="display-options">
+							<!-- IF not S_IS_BOT -->
+								<label>{L_DISPLAY_POSTS}{L_COLON} {S_SELECT_SORT_DAYS}</label>
+								<label>{L_SORT_BY} {S_SELECT_SORT_KEY}</label> <label>{S_SELECT_SORT_DIR}</label>
+								<input type="submit" name="sort" value="{L_GO}" class="button2" />
+							<!-- ENDIF -->
+						</fieldset>
+					</form>
+				</div>
+			<!-- ENDIF -->
+
+			<!-- IF S_DISPLAY_POST_INFO or .pagination or TOTAL_POSTS or TOTAL_TOPICS -->
+				<div class="action-bar">
+					<div class="action-bar--pagination clearfix">
+						<!-- IF not S_IS_BOT and S_DISPLAY_REPLY_INFO -->
+							<!-- EVENT viewforum_buttons_bottom_before -->
+
+								<!-- IF S_IS_LOCKED -->
+										<span class="action-bar-pagination--new locked-icon">
+											<i class="fa fm fa-lock"></i>{L_BUTTON_TOPIC_LOCKED}
+										</span>
+									<!-- ELSE -->
+										<a href="{U_POST_REPLY_TOPIC}" class="action-bar-pagination--new post-icon">
+											<i class="fa fm fa-mail-reply"></i>{L_BUTTON_POST_REPLY}
+										</a>
+								<!-- ENDIF -->
+
+							<!-- EVENT viewforum_buttons_bottom_after -->
+						<!-- ENDIF -->
+
+						<!-- IF not S_IS_BOT and (U_WATCH_TOPIC or U_BOOKMARK_TOPIC or U_BUMP_TOPIC or U_EMAIL_TOPIC or U_PRINT_TOPIC or S_DISPLAY_TOPIC_TOOLS) -->
+							<div class="dropup topic-tools">
+								<a href="#" data-toggle="dropdown">{L_TOPIC_TOOLS} <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<!-- EVENT viewtopic_topic_tools_before -->
+									<!-- IF U_WATCH_TOPIC -->
+										<li>
+											<a href="{U_WATCH_TOPIC}" data-ajax="toggle_link" data-toggle-text="{S_WATCH_TOPIC_TOGGLE}" data-toggle-url="{U_WATCH_TOPIC_TOGGLE}" data-update-all=".watch-topic-link">{S_WATCH_TOPIC_TITLE}</a>
+										</li>
+									<!-- ENDIF -->
+									<!-- IF U_BOOKMARK_TOPIC -->
+										<li>
+											<a href="{U_BOOKMARK_TOPIC}" data-ajax="alt_text" data-alt-text="{S_BOOKMARK_TOGGLE}" data-update-all=".bookmark-link">{S_BOOKMARK_TOPIC}</a>
+										</li>
+									<!-- ENDIF -->
+									<!-- IF U_BUMP_TOPIC --><li><a href="{U_BUMP_TOPIC}" data-ajax="true">{L_BUMP_TOPIC}</a></li><!-- ENDIF -->
+									<!-- IF U_EMAIL_TOPIC --><li><a href="{U_EMAIL_TOPIC}">{L_EMAIL_TOPIC}</a></li><!-- ENDIF -->
+									<!-- IF U_PRINT_TOPIC --><li><a href="{U_PRINT_TOPIC}">{L_PRINT_TOPIC}</a></li><!-- ENDIF -->
+									<!-- EVENT viewtopic_topic_tools_after -->
+								</ul>
+							</div>
+						<!-- ENDIF -->
+					
+						<!-- IF .quickmod -->
+							<div class="dropup quick-mod-tools">
+								<a href="#" data-toggle="dropdown">{L_QUICK_MOD} <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<!-- BEGIN quickmod -->
+										<li><a href="{quickmod.LINK}" <!-- IF $QUICKMOD_AJAX --> data-ajax="true" data-refresh="true"<!-- ENDIF -->>{quickmod.TITLE}</a></li>
+									<!-- END quickmod -->
+								</ul>
+							</div>
+						<!-- ENDIF -->
+						
+						<span class="action-bar-pagination--topics view-topic">{TOTAL_POSTS}</span>
+
+						<!-- IF .pagination or TOTAL_POSTS -->
+							<!-- IF .pagination -->
+								<!-- INCLUDE pagination.html -->
+							<!-- ELSE -->
+								<span class="action-bar-pagination--page-num view-topic">{PAGE_NUMBER}</span>
+							<!-- ENDIF -->
+						<!-- ENDIF -->
+					</div>
+				</div>
+			<!-- ENDIF -->
+
+
+			<!-- Topic Breadcrumb Start -->
+			<div class="topic--breadcrumb clearfix">
+				<ol class="breadcrumb">
+					<li><i class="fa fa-home"></i></li>
+					
+					<!-- IF SCRIPT_NAME eq 'index' -->
+							<li class="active">{SITENAME}</li>
+						<!-- ELSE -->
+							<!-- IF U_SITE_HOME -->
+								<li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+								<!-- ELSE -->
+								<li><a href="{U_INDEX}">{SITENAME}</a></li>
+							<!-- ENDIF -->
+					<!-- ENDIF -->
+					
+					<!-- BEGIN navlinks -->
+						<!-- EVENT overall_header_navlink_prepend -->
+						
+						<!-- IF not navlinks.S_LAST_ROW -->
+							<li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+							<!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+							<li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+							<!-- ELSE -->
+							<li class="active">{navlinks.FORUM_NAME}</li>
+						<!-- ENDIF -->
+						
+						<!-- EVENT overall_header_navlink_append -->
+					<!-- END navlinks -->
+					
+					<!-- IF S_VIEWTOPIC -->
+						<li class="active">{PAGE_TITLE}</li>
+						<!-- ELSEIF S_IN_FAQ -->
+						<li class="active">{L_FAQ}</li>
+						<!-- ELSEIF S_IN_MCP -->
+						<li class="active">{L_MCP}</li>
+						<!-- ELSEIF S_IN_UCP -->
+						<li class="active">{L_UCP}</li>
+						<!-- ELSEIF S_IN_SEARCH -->
+						<li class="active">{L_SEARCH}</li>
+					<!-- ENDIF -->
+				</ol>
+		
+				<!-- IF S_DISPLAY_JUMPBOX -->
+					<div class="topiclist-jumpbox--dropup dropup">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<!-- IF S_IN_MCP and S_MERGE_SELECT -->
+									{L_SELECT_TOPICS_FROM}
+								<!-- ELSEIF S_IN_MCP -->
+									{L_MODERATE_FORUM}
+								<!-- ELSE -->
+									{L_JUMP_TO}
+							<!-- ENDIF -->
+							<span class="caret"></span>
+						</a>
+						
+						<div class="topiclist-jumpbox-dropup--menu dropdown-menu">
+							<ul>
+								<!-- BEGIN jumpbox_forums -->
+									<!-- IF jumpbox_forums.FORUM_ID neq -1 -->
+										<li><a href="{jumpbox_forums.LINK}"><!-- BEGIN level --><span></span><!-- END level -->{jumpbox_forums.FORUM_NAME}</a></li>
+									<!-- ENDIF -->
+								<!-- END jumpbox_forums -->
+							</ul>
+						</div>
+					</div>
+				<!-- ENDIF -->
+			</div>
+			<!-- Topic Breadcrumb End -->
+		</div>
+	</div>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

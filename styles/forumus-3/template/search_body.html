@@ -1,0 +1,268 @@
+<!-- INCLUDE overall_header.html -->
+
+<div id="topic">
+	<div class="container">
+		<div class="topic--body">
+            <!-- Topic Breadcrumb Start -->
+            <div class="topic--breadcrumb clearfix">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i></li>
+
+                    <!-- IF SCRIPT_NAME eq 'index' -->
+                            <li class="active">{SITENAME}</li>
+                        <!-- ELSE -->
+                            <!-- IF U_SITE_HOME -->
+                                <li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+                                <!-- ELSE -->
+                                <li><a href="{U_INDEX}">{SITENAME}</a></li>
+                            <!-- ENDIF -->
+                    <!-- ENDIF -->
+
+                    <!-- BEGIN navlinks -->
+                        <!-- EVENT overall_header_navlink_prepend -->
+
+                        <!-- IF not navlinks.S_LAST_ROW -->
+                            <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                            <!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+                            <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                            <!-- ELSE -->
+                            <li class="active">{navlinks.FORUM_NAME}</li>
+                        <!-- ENDIF -->
+
+                        <!-- EVENT overall_header_navlink_append -->
+                    <!-- END navlinks -->
+
+                    <!-- IF S_VIEWTOPIC -->
+                        <li class="active">{PAGE_TITLE}</li>
+                        <!-- ELSEIF S_IN_FAQ -->
+                        <li class="active">{L_FAQ}</li>
+                        <!-- ELSEIF S_IN_MCP -->
+                        <li class="active">{L_MCP}</li>
+                        <!-- ELSEIF S_IN_UCP -->
+                        <li class="active">{L_UCP}</li>
+                        <!-- ELSEIF S_IN_SEARCH -->
+                        <li class="active">{L_SEARCH}</li>
+                    <!-- ENDIF -->
+                </ol>
+
+                <!-- IF S_DISPLAY_JUMPBOX -->
+                    <div class="topiclist-jumpbox--dropdown dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- IF S_IN_MCP and S_MERGE_SELECT -->
+                                    {L_SELECT_TOPICS_FROM}
+                                <!-- ELSEIF S_IN_MCP -->
+                                    {L_MODERATE_FORUM}
+                                <!-- ELSE -->
+                                    {L_JUMP_TO}
+                            <!-- ENDIF -->
+                            <span class="caret"></span>
+                        </a>
+
+                        <div class="topiclist-jumpbox-dropdown--menu dropdown-menu">
+                            <ul>
+                                <!-- BEGIN jumpbox_forums -->
+                                    <!-- IF jumpbox_forums.FORUM_ID neq -1 -->
+                                        <li><a href="{jumpbox_forums.LINK}"><!-- BEGIN level --><span></span><!-- END level -->{jumpbox_forums.FORUM_NAME}</a></li>
+                                    <!-- ENDIF -->
+                                <!-- END jumpbox_forums -->
+                            </ul>
+                        </div>
+                    </div>
+                <!-- ENDIF -->
+            </div>
+            <!-- Topic Breadcrumb End -->
+            
+			<div class="topic--list">
+				<div class="topic-list--header clearfix">
+					<span class="topic-list-header--title"><i class="fa fa-search"></i>{L_SEARCH}</span>
+				</div>
+				<div class="topic-list--content">
+					<!-- EVENT search_body_form_before -->
+					<form method="get" action="{S_SEARCH_ACTION}" data-focus="keywords">
+
+						<div class="panel adv-search-panel first">
+							<div class="inner">
+							<h3>{L_SEARCH_QUERY}</h3>
+
+							<!-- EVENT search_body_search_query_before -->
+							<fieldset>
+							<!-- EVENT search_body_search_query_prepend -->
+							<dl>
+								<dt><label for="keywords">{L_SEARCH_KEYWORDS}{L_COLON}</label><br /><span>{L_SEARCH_KEYWORDS_EXPLAIN}</span></dt>
+								<dd><input type="search" class="inputbox" name="keywords" id="keywords" size="40" title="{L_SEARCH_KEYWORDS}" /></dd>
+								<dd><label for="terms1"><input type="radio" name="terms" id="terms1" value="all" checked="checked" /> {L_SEARCH_ALL_TERMS}</label></dd>
+								<dd><label for="terms2"><input type="radio" name="terms" id="terms2" value="any" /> {L_SEARCH_ANY_TERMS}</label></dd>
+							</dl>
+							<dl>
+								<dt><label for="author">{L_SEARCH_AUTHOR}{L_COLON}</label><br /><span>{L_SEARCH_AUTHOR_EXPLAIN}</span></dt>
+								<dd><input type="search" class="inputbox" name="author" id="author" size="40" title="{L_SEARCH_AUTHOR}" /></dd>
+							</dl>
+							<!-- EVENT search_body_search_query_append -->
+							</fieldset>
+							<!-- EVENT search_body_search_query_after -->
+
+							</div>
+						</div>
+
+						<div class="panel bg2 adv-search-panel">
+							<div class="inner">
+
+							<h3>{L_SEARCH_OPTIONS}</h3>
+
+							<!-- EVENT search_body_search_options_before -->
+							<fieldset>
+							<!-- EVENT search_body_search_options_prepend -->
+							<dl>
+								<dt><label for="search_forum">{L_SEARCH_FORUMS}{L_COLON}</label><br /><span>{L_SEARCH_FORUMS_EXPLAIN}</span></dt>
+								<dd><select name="fid[]" id="search_forum" multiple="multiple" size="8" title="{L_SEARCH_FORUMS}">{S_FORUM_OPTIONS}</select></dd>
+							</dl>
+							<dl>
+								<dt><label for="search_child1">{L_SEARCH_SUBFORUMS}{L_COLON}</label></dt>
+								<dd>
+									<label for="search_child1"><input type="radio" name="sc" id="search_child1" value="1" checked="checked" /> {L_YES}</label>
+									<label for="search_child2"><input type="radio" name="sc" id="search_child2" value="0" /> {L_NO}</label>
+								</dd>
+							</dl>
+							<dl>
+								<dt><label for="sf1">{L_SEARCH_WITHIN}{L_COLON}</label></dt>
+								<dd><label for="sf1"><input type="radio" name="sf" id="sf1" value="all" checked="checked" /> {L_SEARCH_TITLE_MSG}</label></dd>
+								<dd><label for="sf2"><input type="radio" name="sf" id="sf2" value="msgonly" /> {L_SEARCH_MSG_ONLY}</label></dd>
+								<dd><label for="sf3"><input type="radio" name="sf" id="sf3" value="titleonly" /> {L_SEARCH_TITLE_ONLY}</label></dd>
+								<dd><label for="sf4"><input type="radio" name="sf" id="sf4" value="firstpost" /> {L_SEARCH_FIRST_POST}</label></dd>
+							</dl>
+							<!-- EVENT search_body_search_options_append -->
+
+							<hr class="dashed" />
+
+							<!-- EVENT search_body_search_display_options_prepend -->
+							<dl>
+								<dt><label for="show_results1">{L_DISPLAY_RESULTS}{L_COLON}</label></dt>
+								<dd>
+									<label for="show_results1"><input type="radio" name="sr" id="show_results1" value="posts" checked="checked" /> {L_POSTS}</label>
+									<label for="show_results2"><input type="radio" name="sr" id="show_results2" value="topics" /> {L_TOPICS}</label>
+								</dd>
+							</dl>
+							<dl>
+								<dt><label for="sd">{L_RESULT_SORT}{L_COLON}</label></dt>
+								<dd>{S_SELECT_SORT_KEY}&nbsp;
+									<label for="sa"><input type="radio" name="sd" id="sa" value="a" /> {L_SORT_ASCENDING}</label>
+									<label for="sd"><input type="radio" name="sd" id="sd" value="d" checked="checked" /> {L_SORT_DESCENDING}</label>
+								</dd>
+							</dl>
+							<dl>
+								<dt><label>{L_RESULT_DAYS}{L_COLON}</label></dt>
+								<dd>{S_SELECT_SORT_DAYS}</dd>
+							</dl>
+							<dl>
+								<dt><label>{L_RETURN_FIRST}{L_COLON}</label></dt>
+								<dd><select name="ch" title="{L_RETURN_FIRST}">{S_CHARACTER_OPTIONS}</select> {L_POST_CHARACTERS}</dd>
+							</dl>
+							<!-- EVENT search_body_search_display_options_append -->
+							</fieldset>
+							<!-- EVENT search_body_search_options_after -->
+
+							</div>
+						</div>
+
+						<div class="panel bg3">
+							<fieldset class="submit-buttons">
+								{S_HIDDEN_FIELDS}<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp;
+								<input type="submit" name="submit" value="{L_SEARCH}" class="button1" />
+							</fieldset>
+						</div>
+
+					</form>
+					<!-- EVENT search_body_form_after -->
+				</div>
+			</div>
+
+			<!-- IF .recentsearch -->
+			<div class="topic--list">
+				<div class="topic-list--header clearfix">
+					<span class="topic-list-header--title"><i class="fa fa-search"></i>{L_RECENT_SEARCHES}</span>
+				</div>
+				<div class="topic-list--content">
+					<div class="recent--searches">
+						<!-- BEGIN recentsearch -->
+								<a href="{recentsearch.U_KEYWORDS}">{recentsearch.KEYWORDS}<span class="time">{recentsearch.TIME}</span></a></td>
+							<!-- BEGINELSE -->
+								<span>{L_NO_RECENT_SEARCHES}</span>
+						<!-- END recentsearch -->
+					</div>
+				</div>
+			</div>
+			<!-- ENDIF -->
+			
+            <!-- Topic Breadcrumb Start -->
+            <div class="topic--breadcrumb clearfix">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i></li>
+
+                    <!-- IF SCRIPT_NAME eq 'index' -->
+                            <li class="active">{SITENAME}</li>
+                        <!-- ELSE -->
+                            <!-- IF U_SITE_HOME -->
+                                <li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+                                <!-- ELSE -->
+                                <li><a href="{U_INDEX}">{SITENAME}</a></li>
+                            <!-- ENDIF -->
+                    <!-- ENDIF -->
+
+                    <!-- BEGIN navlinks -->
+                        <!-- EVENT overall_header_navlink_prepend -->
+
+                        <!-- IF not navlinks.S_LAST_ROW -->
+                            <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                            <!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+                            <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                            <!-- ELSE -->
+                            <li class="active">{navlinks.FORUM_NAME}</li>
+                        <!-- ENDIF -->
+
+                        <!-- EVENT overall_header_navlink_append -->
+                    <!-- END navlinks -->
+
+                    <!-- IF S_VIEWTOPIC -->
+                        <li class="active">{PAGE_TITLE}</li>
+                        <!-- ELSEIF S_IN_FAQ -->
+                        <li class="active">{L_FAQ}</li>
+                        <!-- ELSEIF S_IN_MCP -->
+                        <li class="active">{L_MCP}</li>
+                        <!-- ELSEIF S_IN_UCP -->
+                        <li class="active">{L_UCP}</li>
+                        <!-- ELSEIF S_IN_SEARCH -->
+                        <li class="active">{L_SEARCH}</li>
+                    <!-- ENDIF -->
+                </ol>
+
+                <!-- IF S_DISPLAY_JUMPBOX -->
+                    <div class="topiclist-jumpbox--dropup dropup">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- IF S_IN_MCP and S_MERGE_SELECT -->
+                                    {L_SELECT_TOPICS_FROM}
+                                <!-- ELSEIF S_IN_MCP -->
+                                    {L_MODERATE_FORUM}
+                                <!-- ELSE -->
+                                    {L_JUMP_TO}
+                            <!-- ENDIF -->
+                            <span class="caret"></span>
+                        </a>
+
+                        <div class="topiclist-jumpbox-dropup--menu dropdown-menu">
+                            <ul>
+                                <!-- BEGIN jumpbox_forums -->
+                                    <!-- IF jumpbox_forums.FORUM_ID neq -1 -->
+                                        <li><a href="{jumpbox_forums.LINK}"><!-- BEGIN level --><span></span><!-- END level -->{jumpbox_forums.FORUM_NAME}</a></li>
+                                    <!-- ENDIF -->
+                                <!-- END jumpbox_forums -->
+                            </ul>
+                        </div>
+                    </div>
+                <!-- ENDIF -->
+            </div>
+            <!-- Topic Breadcrumb End -->
+		</div>
+	</div>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

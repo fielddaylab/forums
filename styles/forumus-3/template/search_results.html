@@ -1,0 +1,258 @@
+<!-- INCLUDE overall_header.html -->
+
+<div id="topic">
+	<div class="container">
+	    <div class="row">
+            <!-- Topic Items Start -->
+            <div class="<!-- IF SEARCH_TITLE -->col-md-9 <!-- ENDIF -->topic--body">
+                <!-- Topic Breadcrumb Start -->
+                <div class="topic--breadcrumb clearfix">
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i></li>
+
+                        <!-- IF SCRIPT_NAME eq 'index' -->
+                                <li class="active">{SITENAME}</li>
+                            <!-- ELSE -->
+                                <!-- IF U_SITE_HOME -->
+                                    <li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+                                    <!-- ELSE -->
+                                    <li><a href="{U_INDEX}">{SITENAME}</a></li>
+                                <!-- ENDIF -->
+                        <!-- ENDIF -->
+
+                        <!-- BEGIN navlinks -->
+                            <!-- EVENT overall_header_navlink_prepend -->
+
+                            <!-- IF not navlinks.S_LAST_ROW -->
+                                <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                <!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+                                <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                <!-- ELSE -->
+                                <li class="active">{navlinks.FORUM_NAME}</li>
+                            <!-- ENDIF -->
+
+                            <!-- EVENT overall_header_navlink_append -->
+                        <!-- END navlinks -->
+
+                        <!-- IF S_VIEWTOPIC -->
+                            <li class="active">{PAGE_TITLE}</li>
+                            <!-- ELSEIF S_IN_FAQ -->
+                            <li class="active">{L_FAQ}</li>
+                            <!-- ELSEIF S_IN_MCP -->
+                            <li class="active">{L_MCP}</li>
+                            <!-- ELSEIF S_IN_UCP -->
+                            <li class="active">{L_UCP}</li>
+                            <!-- ELSEIF S_IN_SEARCH -->
+                            <li class="active">{L_SEARCH}</li>
+                        <!-- ENDIF -->
+                    </ol>
+
+                    <a href="{U_SEARCH}" class="adv-search-btn hidden-480"><i class="fa fm fa-search"></i>{L_GO_TO_SEARCH_ADV}</a>
+                </div>
+                <!-- Topic Breadcrumb End -->
+
+                <div class="topic--list">
+                    <div class="topic-list--header clearfix">
+                        <span class="topic-list-header--title"><i class="fa fa-search"></i><!-- IF SEARCH_TITLE -->{SEARCH_TITLE}<!-- ELSE -->{SEARCH_MATCHES}<!-- ENDIF --><!-- IF SEARCH_WORDS -->{L_COLON} <a href="{U_SEARCH_WORDS}">{SEARCH_WORDS}</a><!-- ENDIF --></span>
+                    </div>
+                </div>
+
+                <div class="action-bar">
+                    <div class="action-bar--pagination clearfix">
+                        <!-- IF SEARCHED_QUERY --> <span class="action-bar-pagination--new locked-icon">{L_SEARCHED_QUERY}{L_COLON} <strong>{SEARCHED_QUERY}</strong></span><!-- ENDIF -->
+                        <!-- IF IGNORED_WORDS --> <span class="action-bar-pagination--new locked-icon">{L_IGNORED_TERMS}{L_COLON} <strong>{IGNORED_WORDS}</strong></span><!-- ENDIF -->
+                        <!-- IF PHRASE_SEARCH_DISABLED --> <span class="action-bar-pagination--new locked-icon"><strong>{L_PHRASE_SEARCH_DISABLED}</strong></span><!-- ENDIF -->
+
+                        <span class="action-bar-pagination--topics search-pagination">{SEARCH_MATCHES}</span>
+
+                        <!-- IF .pagination or TOTAL_POSTS -->
+                            <!-- IF .pagination -->
+                                <!-- INCLUDE pagination.html -->
+                            <!-- ELSE -->
+                                {PAGE_NUMBER}
+                            <!-- ENDIF -->
+                        <!-- ENDIF -->
+                    </div>
+                </div>
+
+                <div class="topic--list.expended">
+                    <div class="topic-list--content search--results">
+                        <ul>
+                            <!-- IF S_SHOW_TOPICS -->
+                                    <!-- IF .searchresults -->
+                                            <!-- BEGIN searchresults -->
+                                                <!-- EVENT search_results_topic_before -->
+                                                <li>
+                                                    <div class="topic-list-content--icon">
+                                                        <i class="fa fa-comment-o"></i>
+                                                    </div>
+                                                    <div class="topic-list-content--title no-desc">
+                                                        <h2><a href="{searchresults.U_VIEW_TOPIC}">{searchresults.TOPIC_TITLE}</a></h2>
+                                                    </div>
+                                                    <div class="topic-list-content--meta">
+                                                        <span class="recent-post-time">{L_POST_BY_AUTHOR} {searchresults.TOPIC_AUTHOR_FULL} {L_IN} <a href="{searchresults.U_VIEW_FORUM}">{searchresults.FORUM_TITLE}</a></span>
+                                                        <span class="recent-post-time">{searchresults.FIRST_POST_TIME}</span>
+                                                    </div>
+                                                    <div class="topic-list-content--stats">
+                                                        <p><strong>{searchresults.TOPIC_VIEWS}</strong>{L_Replies}</p>
+                                                        <p><strong>{searchresults.TOPIC_VIEWS}</strong>{L_Views}</p>
+                                                    </div>
+                                                </li>
+                                                <!-- EVENT search_results_topic_after -->
+                                            <!-- END searchresults -->
+                                    <!-- ELSE -->
+                                        <li>
+                                            <p class="message">{L_NO_SEARCH_RESULTS}</p>
+                                        </li>
+                                    <!-- ENDIF -->
+
+                                <!-- ELSE -->
+                                    <!-- BEGIN searchresults -->
+                                            <li>
+                                                <!-- EVENT search_results_post_before -->
+                                                <div class="search clearfix">
+                                                    <!-- IF searchresults.S_IGNORE_POST -->
+                                                        <div class="postbody">
+                                                            {searchresults.L_IGNORE_POST}
+                                                        </div>
+                                                    <!-- ELSE -->
+                                                        <dl class="postprofile">
+                                                            <!-- EVENT search_results_postprofile_before -->
+                                                                <dt class="author">{L_POST_BY_AUTHOR} {searchresults.POST_AUTHOR_FULL}</dt>
+                                                                <dd class="search-result-date">{searchresults.POST_DATE}</dd>
+                                                                <dd>{L_FORUM}{L_COLON} <a href="{searchresults.U_VIEW_FORUM}">{searchresults.FORUM_TITLE}</a></dd>
+                                                                <dd>{L_TOPIC}{L_COLON} <a href="{searchresults.U_VIEW_TOPIC}">{searchresults.TOPIC_TITLE}</a></dd>
+                                                                <dd>{L_REPLIES}{L_COLON} <strong>{searchresults.TOPIC_REPLIES}</strong></dd>
+                                                                <dd>{L_VIEWS}{L_COLON} <strong>{searchresults.TOPIC_VIEWS}</strong></dd>
+                                                            <!-- EVENT search_results_postprofile_after -->
+                                                        </dl>
+
+                                                        <div class="postbody">
+                                                            <h3><a href="{searchresults.U_VIEW_POST}">{searchresults.POST_SUBJECT}</a></h3>
+                                                            <div class="content">{searchresults.MESSAGE}</div>
+                                                        </div>
+                                                    <!-- ENDIF -->
+                                                </div>
+                                                <!-- EVENT search_results_post_after -->
+                                            </li>
+                                        <!-- BEGINELSE -->
+                                            <li>
+                                                <p>{L_NO_SEARCH_RESULTS}</p>
+                                            </li>
+                                    <!-- END searchresults -->
+                            <!-- ENDIF -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- IF .pagination or .searchresults or S_SELECT_SORT_KEY or S_SELECT_SORT_DAYS -->
+                    <div class="display-options-bar">
+                        <form method="post" action="{S_SEARCH_ACTION}">
+                            <fieldset class="display-options">
+                                <!-- IF S_SELECT_SORT_DAYS or S_SELECT_SORT_KEY -->
+                                    <label><!-- IF S_SHOW_TOPICS -->{L_DISPLAY_POSTS}<!-- ELSE -->{L_SORT_BY}</label>
+                                    <label><!-- ENDIF --> {S_SELECT_SORT_DAYS}<!-- IF S_SELECT_SORT_KEY --></label> <label>{S_SELECT_SORT_KEY}</label>
+                                    <label>{S_SELECT_SORT_DIR}<!-- ENDIF --></label>
+                                    <input type="submit" name="sort" value="{L_GO}" class="button2" />
+                                <!-- ENDIF -->
+                            </fieldset>
+                        </form>
+                    </div>
+                <!-- ENDIF -->
+
+                <!-- IF S_DISPLAY_POST_INFO or .pagination or TOTAL_POSTS or TOTAL_TOPICS -->
+                    <div class="action-bar">
+                        <div class="action-bar--pagination clearfix">
+                            <!-- IF SEARCHED_QUERY --> <span class="action-bar-pagination--new locked-icon">{L_SEARCHED_QUERY}{L_COLON} <strong>{SEARCHED_QUERY}</strong></span><!-- ENDIF -->
+                            <!-- IF IGNORED_WORDS --> <span class="action-bar-pagination--new locked-icon">{L_IGNORED_TERMS}{L_COLON} <strong>{IGNORED_WORDS}</strong></span><!-- ENDIF -->
+                            <!-- IF PHRASE_SEARCH_DISABLED --> <span class="action-bar-pagination--new locked-icon"><strong>{L_PHRASE_SEARCH_DISABLED}</strong></span><!-- ENDIF -->
+
+                            <span class="action-bar-pagination--topics search-pagination db-480 bd-hidden-480 reset-margin-480 reset-padding-480 mb-10-480">{SEARCH_MATCHES}</span>
+
+                            <!-- IF .pagination or TOTAL_POSTS -->
+                                <!-- IF .pagination -->
+                                    <!-- INCLUDE pagination.html -->
+                                <!-- ELSE -->
+                                    {PAGE_NUMBER}
+                                <!-- ENDIF -->
+                            <!-- ENDIF -->
+                        </div>
+                    </div>
+                <!-- ENDIF -->
+
+                <!-- Topic Breadcrumb Start -->
+                <div class="topic--breadcrumb clearfix">
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home"></i></li>
+
+                        <!-- IF SCRIPT_NAME eq 'index' -->
+                                <li class="active">{SITENAME}</li>
+                            <!-- ELSE -->
+                                <!-- IF U_SITE_HOME -->
+                                    <li><a href="{U_SITE_HOME}">{SITENAME}</a></li>
+                                    <!-- ELSE -->
+                                    <li><a href="{U_INDEX}">{SITENAME}</a></li>
+                                <!-- ENDIF -->
+                        <!-- ENDIF -->
+
+                        <!-- BEGIN navlinks -->
+                            <!-- EVENT overall_header_navlink_prepend -->
+
+                            <!-- IF not navlinks.S_LAST_ROW -->
+                                <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                <!-- ELSEIF navlinks.S_LAST_ROW and S_VIEWTOPIC -->
+                                <li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+                                <!-- ELSE -->
+                                <li class="active">{navlinks.FORUM_NAME}</li>
+                            <!-- ENDIF -->
+
+                            <!-- EVENT overall_header_navlink_append -->
+                        <!-- END navlinks -->
+
+                        <!-- IF S_VIEWTOPIC -->
+                            <li class="active">{PAGE_TITLE}</li>
+                            <!-- ELSEIF S_IN_FAQ -->
+                            <li class="active">{L_FAQ}</li>
+                            <!-- ELSEIF S_IN_MCP -->
+                            <li class="active">{L_MCP}</li>
+                            <!-- ELSEIF S_IN_UCP -->
+                            <li class="active">{L_UCP}</li>
+                            <!-- ELSEIF S_IN_SEARCH -->
+                            <li class="active">{L_SEARCH}</li>
+                        <!-- ENDIF -->
+                    </ol>
+
+                    <!-- IF S_DISPLAY_JUMPBOX -->
+                        <div class="topiclist-jumpbox--dropup dropup">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- IF S_IN_MCP and S_MERGE_SELECT -->
+                                        {L_SELECT_TOPICS_FROM}
+                                    <!-- ELSEIF S_IN_MCP -->
+                                        {L_MODERATE_FORUM}
+                                    <!-- ELSE -->
+                                        {L_JUMP_TO}
+                                <!-- ENDIF -->
+                                <span class="caret"></span>
+                            </a>
+
+                            <div class="topiclist-jumpbox-dropup--menu dropdown-menu">
+                                <ul>
+                                    <!-- BEGIN jumpbox_forums -->
+                                        <!-- IF jumpbox_forums.FORUM_ID neq -1 -->
+                                            <li><a href="{jumpbox_forums.LINK}"><!-- BEGIN level --><span></span><!-- END level -->{jumpbox_forums.FORUM_NAME}</a></li>
+                                        <!-- ENDIF -->
+                                    <!-- END jumpbox_forums -->
+                                </ul>
+                            </div>
+                        </div>
+                    <!-- ENDIF -->
+                </div>
+                <!-- Topic Breadcrumb End -->
+            </div>
+            <!-- Topic Items End -->
+            
+        </div>
+	</div>
+</div>
+
+<!-- INCLUDE overall_footer.html -->

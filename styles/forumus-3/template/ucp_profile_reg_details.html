@@ -12,11 +12,23 @@
 
 	<fieldset>
 	<!-- IF ERROR --><p class="error">{ERROR}</p><!-- ENDIF -->
+
+<!-- PHILL COMMENT
 	<!-- EVENT ucp_profile_register_details_before -->
 	<dl>
 		<dt><label <!-- IF S_CHANGE_USERNAME -->for="username"<!-- ENDIF -->>{L_USERNAME}{L_COLON}</label><br /><span>{L_USERNAME_EXPLAIN}</span></dt>
 		<dd><!-- IF S_CHANGE_USERNAME --><input type="text" name="username" id="username" value="{USERNAME}" class="inputbox" title="{L_USERNAME}" /><!-- ELSE --><strong>{USERNAME}</strong><!-- ENDIF --></dd>
 	</dl>
+END PHIL COMMENT --!>
+
+<!--  PHIL ADDITION --!>
+        <dl>
+            <dt><label>Edit Account Settings</label><br /></dt>
+            <dd><a href="https://fielddaylab.wisc.edu/auth/">Field Day Account Settings</a></dd>
+        </dl>
+<!-- END PHIL ADDITION --!>
+
+<!-- PHIL COMMENT
 	<dl>
 		<dt><label for="email">{L_EMAIL_ADDRESS}{L_COLON}</label></dt>
 		<dd><!-- IF S_CHANGE_EMAIL --><input type="email" name="email" id="email" maxlength="100" value="{EMAIL}" class="inputbox" title="{L_EMAIL_ADDRESS}" autocomplete="off" /><!-- ELSE --><strong>{EMAIL}</strong><!-- ENDIF --></dd>
@@ -32,10 +44,13 @@
 		</dl>
 	<!-- ENDIF -->
 	<!-- EVENT ucp_profile_register_details_after -->	
+END PHIL COMMENT --!>
+
 	</fieldset>
 	</div>
 </div>
 
+<!-- PHIL COMMENT
 <div class="panel">
 	<div class="inner">
 
@@ -54,6 +69,7 @@
 	<input type="submit" name="submit" value="{L_SUBMIT}" class="button1" />
 	{S_FORM_TOKEN}
 </fieldset>
+END PHIL COMMENT --!>
 </form>
 
 <!-- INCLUDE ucp_footer.html -->

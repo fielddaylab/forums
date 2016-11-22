@@ -58,7 +58,9 @@ dl.details dd a:hover,
 .login-panel .content p a:hover,
 .login-panel .content p a:focus,
 #faqlinks a,
-p.message a {
+p.message a,
+#attach-panel .panel.hidden[style] .file-name a:hover,
+#attach-panel .panel.hidden[style] .file-name a:focus {
     color: #8CBEB2;
 }
 

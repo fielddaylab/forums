@@ -56,7 +56,9 @@ dl.details dd a:hover,
 .member-search a:hover,
 .member-search a:focus,
 #faqlinks a,
-p.message a {
+p.message a,
+#attach-panel .panel.hidden[style] .file-name a:hover,
+#attach-panel .panel.hidden[style] .file-name a:focus {
     color: #ff9600;
 }
 

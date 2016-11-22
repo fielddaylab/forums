@@ -119,6 +119,10 @@
 				<a href="#tab1" data-toggle="tab"><i class="fa fm fa-navicon"></i>Quick Links</a>
 			</li>
 			
+            <li class="hidden-sm hidden-xs<!-- IF SCRIPT_NAME eq 'faq' --> active<!-- ENDIF -->">
+                <a href="{U_FAQ}" title="{L_FAQ_EXPLAIN}"><i class="fa fm fa-question-circle"></i>{L_FAQ}</a>
+            </li>
+			
 			<!-- IF U_ACP -->
 				<li>
 					<a href="{U_ACP}"><i class="fa fm fa-gears"></i>{L_ACP_SHORT}</a>
@@ -151,6 +155,10 @@
 							<li><a href="{U_SEARCH_ACTIVE_TOPICS}"><i class="fa fm fa-comments-o"></i>{L_SEARCH_ACTIVE_TOPICS}</a></li>
 							<li><a href="{U_SEARCH}"><i class="fa fm fa-search"></i>{L_SEARCH}</a></li>
 						<!-- ENDIF -->
+			
+                        <li class="hidden-md hidden-lg<!-- IF SCRIPT_NAME eq 'faq' --> active<!-- ENDIF -->">
+                            <a href="{U_FAQ}" title="{L_FAQ_EXPLAIN}"><i class="fa fm fa-question-circle"></i>{L_FAQ}</a>
+                        </li>
 
 						<!-- IF U_TEAM -->
 							<li><a href="{U_TEAM}"><i class="fa fm fa-users"></i>{L_THE_TEAM}</a></li>

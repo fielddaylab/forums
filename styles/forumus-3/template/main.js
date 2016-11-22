@@ -3,7 +3,7 @@
 [Main Script]
 
 Project: ForumUS - Responsive phpBB 3.1 Theme/Style
-Version: 1.0
+Version: 1.1
 Author : http://themeforest.net/user/themelooks
 
 */
@@ -214,7 +214,86 @@ Author : http://themeforest.net/user/themelooks
 			}
 		});
 
-		
+		/* ------------------------------------------------------------------------- *
+		 * COLOR SWITCHER
+		 * ------------------------------------------------------------------------- */
+        var themePath = $('body').data('theme-path');
+        
+        if ( typeof $.cColorSwitcher !== "undefined" ) {
+            $.cColorSwitcher({
+                'switcherTitle': 'Style 1 Colors:',
+                'switcherColors': [{
+                    bgColor: '#293a4a',
+                    fgColor: '#ff6c2c',
+                    filepath: themePath + '/colors/style-1-color-1.css'
+                }, {
+                    bgColor: '#8bc34a',
+                    fgColor: '#303030',
+                    filepath: themePath + '/colors/style-1-color-2.css'
+                }, {
+                    bgColor: '#03a9f4',
+                    fgColor: '#303030',
+                    filepath: themePath + '/colors/style-1-color-3.css'
+                }, {
+                    bgColor: '#ff9600',
+                    fgColor: '#293a4a',
+                    filepath: themePath + '/colors/style-1-color-4.css'
+                }, {
+                    bgColor: '#e91e63',
+                    fgColor: '#303030',
+                    filepath: themePath + '/colors/style-1-color-5.css'
+                }, {
+                    bgColor: '#00BCD4',
+                    fgColor: '#303030',
+                    filepath: themePath + '/colors/style-1-color-6.css'
+                }, {
+                    bgColor: '#FC5143',
+                    fgColor: '#303030',
+                    filepath: themePath + '/colors/style-1-color-7.css'
+                }, {
+                    bgColor: '#00B249',
+                    fgColor: '#303030',
+                    filepath: themePath + '/colors/style-1-color-8.css'
+                }, {
+                    bgColor: '#D48B91',
+                    fgColor: '#303030',
+                    filepath: themePath + '/colors/style-1-color-9.css'
+                }, {
+                    bgColor: '#8CBEB2',
+                    fgColor: '#303030',
+                    filepath: themePath + '/colors/style-1-color-10.css'
+                }, {
+                    bgColor: '#4267b2',
+                    fgColor: '#303030',
+                    filepath: themePath + '/colors/style-1-color-11.css'
+                }, {
+                    bgColor: '#ff5252',
+                    fgColor: '#293a4a',
+                    filepath: themePath + '/colors/style-1-color-12.css'
+                }],
+                'switcherTarget': $('#mainColorScheme')
+            })
+                .children('.ccs--body')
+                    .children('ul')
+                    .eq(1)
+                        .children('li')
+                            .each(function () {
+                                var $t = $(this),
+                                $tD = $t.data('file-path'),
+                                $tDR = $tD.replace('style-1', 'style-2');
+
+                                $(this).attr('data-file-path', $tDR);
+                            })
+                    .end()
+                    .siblings('a')
+                    .css({
+                        'display': 'block',
+                        'color': '#293a4a',
+                        'text-align': 'center',
+                        'line-height': '40px'
+                    });
+        }
+
 		/* ------------------------------------------------------------------------- *
 		 * BACK TO TOP BUTTON
 		 * ------------------------------------------------------------------------- */

@@ -132,7 +132,7 @@ input.button2,
 *****************************************/
 /* COLOR */
 #footerSubscribeForm button[type="submit"]:hover {
-    color: #293a4a;
+    color: #311dda;
 }
 
 /* BACKGROUND-COLOR */
@@ -142,11 +142,11 @@ input.button2,
 #footerSubscribeForm button[type="submit"],
 .back-to-top button,
 fieldset.submit-buttons input:hover {
-    background-color: #293a4a;
+    background-color: #311dda;
 }
 
 /* BORDER-COLOR */
 .header--search-bar .input-group-btn .btn:hover,
 .header--search-bar .input-group-btn .btn:focus {
-    border-color: #293a4a;
+    border-color: #311dda;
 }

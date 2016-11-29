@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row">
                     <!-- Topic Items Start -->
-                    <div class="col-md-9 topic--body">
+                    <div class="topic--body.expended">
 						<!-- INCLUDE breadcrumb.html -->
 						
 						
@@ -15,88 +15,6 @@
 						<!-- INCLUDE breadcrumb.html -->
                     </div>
                     <!-- Topic Items End -->
-                    <!-- Topic Sidebar Start -->
-                    <div class="col-md-3 topic--sidebar">
-						<!-- IF S_REGISTER_ENABLED and not S_REGISTERED_USER -->
-						
-							<!-- Topic Sidebar Widget Start -->
-							<div class="topic-sidebar--widget">
-								<!-- Sidebar Signup Widget Start -->
-								<div class="topic-sidebar-widget--signup">
-									<a href="{U_REGISTER}" class="btn btn-block">{L_REGISTER}</a>
-								</div>
-								<!-- Sidebar Signup Widget End -->
-							</div>
-							<!-- Topic Sidebar Widget End -->
-							
-						<!-- ENDIF -->
-						
-						<!-- Topic Sidebar Widget Start -->
-						<div class="topic-sidebar--widget">
-							<div class="topic-list--header clearfix">
-								<span class="topic-list-header--title"><i class="fa fa-bar-chart"></i>{L_Advertisement}</span>
-								<span class="topic-list-header--toggle-btn"><i class="fa fa-minus"></i></span>
-							</div>
-							<div class="topic-list--content">
-								<!-- Sidebar Ad Widget Start -->
-								<div class="topic-sidebar-widget--ad">
-									<a href="#" class="ad">
-									    <img src="{T_THEME_PATH}/images/sidebar-ad/orange-banner-ad-300x250.png" alt="" class="img-responsive">
-								    </a>
-								    <div class="ad--2 clearfix">
-                                        <a href="#" class="ad">
-                                            <img src="{T_THEME_PATH}/images/sidebar-ad/business-banner-ad-125x125.png" alt="" class="img-responsive">
-                                        </a>
-                                        <a href="#" class="ad">
-                                            <img src="{T_THEME_PATH}/images/sidebar-ad/cloud-banner-ad-125x125.png" alt="" class="img-responsive">
-                                        </a>
-								    </div>
-								</div>
-								<!-- Sidebar Ad Widget End -->
-							</div>
-						</div>
-						<!-- Topic Sidebar Widget End -->
-						
-						<!-- Topic Sidebar Widget Start -->
-						<div class="topic-sidebar--widget">
-							<div class="topic-list--header clearfix">
-								<span class="topic-list-header--title"><i class="fa fa-users"></i>{L_TOTAL} {L_MEMBERS}</span>
-								<span class="topic-list-header--toggle-btn"><i class="fa fa-minus"></i></span>
-							</div>
-							<div class="topic-list--content">
-								<!-- Sidebar Statistics Widget Start -->
-								<div class="topic-sidebar-widget--statistics">
-								    <!-- IF TOTAL_USERS -->
-									    <p class="clearfix">{TOTAL_USERS}</p>
-									<!-- ENDIF -->
-								    <!-- IF NEWEST_USER -->
-									    <p class="clearfix">{NEWEST_USER}</p>
-									<!-- ENDIF -->
-									<p>{TOTAL_USERS_ONLINE}</p>
-								</div>
-								<!-- Sidebar Statistics Widget End -->
-							</div>
-						</div>
-						<!-- Topic Sidebar Widget End -->
-						
-						<!-- Topic Sidebar Widget Start -->
-						<div class="topic-sidebar--widget">
-							<div class="topic-list--header clearfix">
-								<span class="topic-list-header--title"><i class="fa fa-bar-chart"></i>Statistics</span>
-								<span class="topic-list-header--toggle-btn"><i class="fa fa-minus"></i></span>
-							</div>
-							<div class="topic-list--content">
-								<!-- Sidebar Statistics Widget Start -->
-								<div class="topic-sidebar-widget--statistics">
-									<p class="clearfix">{TOTAL_POSTS}</p>
-									<p class="clearfix">{TOTAL_TOPICS}</p>
-								</div>
-								<!-- Sidebar Statistics Widget End -->
-							</div>
-						</div>
-						<!-- Topic Sidebar Widget End -->
-                    </div>
-                    <!-- Topic Sidebar End -->
                 </div>
             </div>
         </div>

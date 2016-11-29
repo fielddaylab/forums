@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row">
                     <!-- Topic Items Start -->
-                    <div class="col-md-9 topic--body">
+                    <div class="topic--body.expended">
 						<!-- INCLUDE breadcrumb.html -->
 
 						
@@ -20,41 +20,10 @@
 						<!-- INCLUDE topiclist.html -->
 						
 						
-						<!-- IF S_SELECT_SORT_DAYS and not S_DISPLAY_ACTIVE -->
-							<div class="display-options-bar">
-								<form method="post" action="{S_FORUM_ACTION}">
-									<fieldset class="display-options">
-										<!-- IF not S_IS_BOT -->
-											<label>{L_DISPLAY_TOPICS}{L_COLON} {S_SELECT_SORT_DAYS}</label>
-											<label>{L_SORT_BY} {S_SELECT_SORT_KEY}</label>
-											<label>{S_SELECT_SORT_DIR}</label>
-											<input type="submit" name="sort" value="{L_GO}" class="button2" />
-										<!-- ENDIF -->
-									</fieldset>
-								</form>
-							</div>
-						<!-- ENDIF -->
 
 						
 						<!-- INCLUDE topiclist_active_bar.html -->
 
-						<!-- Topic Stats Start -->
-						<div class="topic--stats">
-							<!-- IF S_DISPLAY_ONLINE_LIST -->
-								<div class="stat-block online-list">
-									<h3><!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a><!-- ELSE -->{L_WHO_IS_ONLINE}<!-- ENDIF --></h3>
-									<p>{LOGGED_IN_USER_LIST}</p>
-								</div>
-							<!-- ENDIF -->
-
-							<!-- IF S_DISPLAY_POST_INFO -->
-								<div class="stat-block permissions">
-									<h3>{L_FORUM_PERMISSIONS}</h3>
-									<p><!-- BEGIN rules -->{rules.RULE}<br /><!-- END rules --></p>
-								</div>
-							<!-- ENDIF -->
-						</div>
-						<!-- Topic Stats End -->
 						
 						<!-- Topic Breadcrumb Start -->
 						<div class="topic--breadcrumb clearfix">
@@ -126,116 +95,6 @@
 						<!-- Topic Breadcrumb End -->
                     </div>
                     <!-- Topic Items End -->
-                    <!-- Topic Sidebar Start -->
-                    <div class="col-md-3 topic--sidebar">
-						<!-- IF S_REGISTER_ENABLED and not S_REGISTERED_USER -->
-						
-							<!-- Topic Sidebar Widget Start -->
-							<div class="topic-sidebar--widget">
-								<!-- Sidebar Signup Widget Start -->
-								<div class="topic-sidebar-widget--signup">
-									<a href="{U_REGISTER}" class="btn btn-block">{L_REGISTER}</a>
-								</div>
-								<!-- Sidebar Signup Widget End -->
-							</div>
-							<!-- Topic Sidebar Widget End -->
-							
-						<!-- ENDIF -->
-						
-						<!-- IF S_REGISTERED_USER -->
-							<!-- IF S_DISPLAY_POST_INFO or .pagination or TOTAL_POSTS or TOTAL_TOPICS -->
-								<!-- IF not S_IS_BOT and S_DISPLAY_POST_INFO -->
-									<!-- EVENT viewforum_buttons_top_before -->
-									
-									<!-- Topic Sidebar Widget Start -->
-									<div class="topic-sidebar--widget">
-										<!-- Sidebar Signup Widget Start -->
-										<div class="topic-sidebar-widget--signup">
-											<a href="{U_POST_NEW_TOPIC}" class="btn btn-block">
-												<!-- IF S_IS_LOCKED -->
-													{L_BUTTON_FORUM_LOCKED}
-													<!-- ELSE -->
-													{L_BUTTON_NEW_TOPIC}
-												<!-- ENDIF -->
-											</a>
-										</div>
-										<!-- Sidebar Signup Widget End -->
-									</div>
-									<!-- Topic Sidebar Widget End -->
-
-									<!-- EVENT viewforum_buttons_top_after -->
-								<!-- ENDIF -->
-							<!-- ENDIF -->
-						<!-- ENDIF -->
-						
-						<!-- Topic Sidebar Widget Start -->
-						<div class="topic-sidebar--widget">
-							<div class="topic-list--header clearfix">
-								<span class="topic-list-header--title"><i class="fa fa-bar-chart"></i>{L_Advertisement}</span>
-								<span class="topic-list-header--toggle-btn"><i class="fa fa-minus"></i></span>
-							</div>
-							<div class="topic-list--content">
-								<!-- Sidebar Ad Widget Start -->
-								<div class="topic-sidebar-widget--ad">
-									<a href="#" class="ad">
-									    <img src="{T_THEME_PATH}/images/sidebar-ad/orange-banner-ad-300x250.png" alt="" class="img-responsive">
-								    </a>
-								    <div class="ad--2 clearfix">
-                                        <a href="#" class="ad">
-                                            <img src="{T_THEME_PATH}/images/sidebar-ad/empty-ad-125x125.jpg" alt="" class="img-responsive">
-                                        </a>
-                                        <a href="#" class="ad">
-                                            <img src="{T_THEME_PATH}/images/sidebar-ad/empty-ad-125x125.jpg" alt="" class="img-responsive">
-                                        </a>
-								    </div>
-								</div>
-								<!-- Sidebar Ad Widget Start -->
-							</div>
-						</div>
-						<!-- Topic Sidebar Widget End -->
-						
-						<!-- Topic Sidebar Widget Start -->
-						<div class="topic-sidebar--widget">
-							<div class="topic-list--header clearfix">
-								<span class="topic-list-header--title"><i class="fa fa-users"></i>{L_TOTAL} {L_MEMBERS}</span>
-								<span class="topic-list-header--toggle-btn"><i class="fa fa-minus"></i></span>
-							</div>
-							<div class="topic-list--content">
-								<!-- Sidebar Statistics Widget Start -->
-								<div class="topic-sidebar-widget--statistics">
-								    <!-- IF TOTAL_USERS -->
-									    <p class="clearfix">{TOTAL_USERS}</p>
-									<!-- ENDIF -->
-								    <!-- IF NEWEST_USER -->
-									    <p class="clearfix">{NEWEST_USER}</p>
-									<!-- ENDIF -->
-									<p>{TOTAL_USERS_ONLINE}</p>
-								</div>
-								<!-- Sidebar Statistics Widget End -->
-							</div>
-						</div>
-						<!-- Topic Sidebar Widget End -->
-						
-						<!-- IF TOTAL_POSTS or TOTAL_TOPICS or TOTAL_USERS_ONLINE -->
-							<!-- Topic Sidebar Widget Start -->
-							<div class="topic-sidebar--widget">
-								<div class="topic-list--header clearfix">
-									<span class="topic-list-header--title"><i class="fa fa-bar-chart"></i>Statistics</span>
-									<span class="topic-list-header--toggle-btn"><i class="fa fa-minus"></i></span>
-								</div>
-								<div class="topic-list--content">
-									<!-- Sidebar Statistics Widget Start -->
-									<div class="topic-sidebar-widget--statistics">
-										<p class="clearfix">{TOTAL_POSTS}</p>
-										<p class="clearfix">{TOTAL_TOPICS}</p>
-									</div>
-									<!-- Sidebar Statistics Widget End -->
-								</div>
-							</div>
-							<!-- Topic Sidebar Widget End -->
-						<!-- ENDIF -->
-                    </div>
-                    <!-- Topic Sidebar End -->
                 </div>
             </div>
         </div>

@@ -86,20 +86,6 @@
 									<p><strong>{topicrow.VIEWS}</strong>{L_VIEWS}</p>
 								</div>
                                 
-                                <!-- IF .topicrow.pagination -->
-                                <div class="topic-list--pagination pagination">
-                                    <ul>
-                                    <!-- BEGIN pagination -->
-                                        <!-- IF topicrow.pagination.S_IS_PREV -->
-                                        <!-- ELSEIF topicrow.pagination.S_IS_CURRENT --><li class="active"><span>{topicrow.pagination.PAGE_NUMBER}</span></li>
-                                        <!-- ELSEIF topicrow.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
-                                        <!-- ELSEIF topicrow.pagination.S_IS_NEXT -->
-                                        <!-- ELSE --><li><a href="{topicrow.pagination.PAGE_URL}">{topicrow.pagination.PAGE_NUMBER}</a></li>
-                                        <!-- ENDIF -->
-                                    <!-- END pagination -->
-                                    </ul>
-                                </div>
-                                <!-- ENDIF -->
 							<!-- EVENT viewforum_body_topic_row_append -->
 						</li>
 					<!-- EVENT viewforum_body_topic_row_after -->
